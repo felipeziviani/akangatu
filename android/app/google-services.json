@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "458951487671",
+    "project_id": "akanga-version",
+    "storage_bucket": "akanga-version.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458951487671:android:98830b9f6e468a00391d32",
+        "android_client_info": {
+          "package_name": "com.example.akangatu_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458951487671-vj95qm7kac2b6floubk7c2sbpmsi31a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIxwcB5bAP9Iq-pDs8XxZwPcrty5mF_b0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458951487671-vj95qm7kac2b6floubk7c2sbpmsi31a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
