@@ -1,10 +1,10 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth_service.dart';
-
 class menuScreen extends StatefulWidget {
   const menuScreen({super.key});
 
@@ -33,7 +33,6 @@ class _menuScreen extends State<menuScreen> {
             ),
           ),
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
@@ -160,3 +159,4 @@ class _menuScreen extends State<menuScreen> {
     );
   }
 }
+

@@ -1,5 +1,6 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/screens/card_screen.dart';
+import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:akangatu_project/services/auth_service.dart';
 import 'package:akangatu_project/widgets/auth_check.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class AkangaApp extends StatelessWidget {
             primaryColor: Colors.purple.shade900,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: CardPage(),
+          home: AuthCheck(),
         );
       },
     );

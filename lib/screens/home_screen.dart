@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      drawer: const ClipRRect(
+      drawer: ClipRRect(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(35),
           bottomRight: Radius.circular(35),

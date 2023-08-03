@@ -16,7 +16,7 @@ class CardPage extends StatefulWidget {
 }
 
 class _CardPageState extends State<CardPage> {
-String description = 'My great package';
+late String description;
   TextEditingController controller = TextEditingController();
 
   @override
@@ -59,13 +59,6 @@ String description = 'My great package';
       ),
       drawerScrimColor: ThemeController.instance.isdartTheme ? Color(0xFF2D2D2D) : Colors.white,
       body: Container(
-      child: Theme(
-        data: ThemeData(
-          primaryColor: const Color(0xFF2C1C6B),
-          colorScheme: ColorScheme.light().copyWith(secondary: const Color(0xFF200681)),
-          cardColor: const Color(0xFFF8F9FC),
-          textTheme: const TextTheme(bodyText1: TextStyle(fontSize: 20, color: Color(0xFF2C1C6B))),
-        ),
         child: Scaffold(
           body: SafeArea(
             child: Padding(
@@ -109,9 +102,6 @@ String description = 'My great package';
           ),
         ),
       ),
-    ),
     );
   }
  }
- 
-    

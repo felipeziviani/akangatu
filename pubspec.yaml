@@ -44,11 +44,10 @@ dependencies:
   shared_preferences: ^2.2.0
   markdown_editable_textinput: ^2.2.0
   flutter_markdown: ^0.6.15
+  flutter_launcher_icons: ^0.13.1
 
-dev_dependencies:
   flutter_test:
     sdk: flutter
-
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -68,8 +67,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  # - assets/iconemail.png
+  assets:
+   - lib/images/icon.png
   # - assets/iconlock.png
   # - assets/iconuser.png
 
