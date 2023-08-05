@@ -1,6 +1,7 @@
 import 'package:akangatu_project/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class LoginRegisterPage extends StatefulWidget {
@@ -82,7 +83,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
           physics: NeverScrollableScrollPhysics(),
           child: Container(
             child: Stack(
-              children: <Widget>[
+              children: <Widget>[      
                 Container(
                     width: 360 * fem,
                     height: 370 * fem,
