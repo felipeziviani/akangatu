@@ -13,39 +13,61 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool status = false;
 
-  List<Decks> decks = <Decks> [
+  List<Decks> decks = <Decks>[
     Decks(
-      false,
-      'Example Deck 01',
-      Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Column(
-          children: <Widget>[
-            Text('Example Deck Description 01'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(Icons.access_time_filled_rounded),
-                    Text('00/00/0000'),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(Icons.access_time_filled_rounded),
-                    Text('00/00/0000'),
-                  ],
-                ),
-              ],
-            )
-          ],
-        ),
-      ))
+        false,
+        'DECKCARDS FANTASY \n01',
+        Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Lorem ipsum dolor sit amet consectetur\nadipisicing elit. ',
+                      style: TextStyle(
+                        
+                          fontSize: 19,
+                          color: Colors.white,)),
+                ],
+              ),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(Icons.access_time_filled_rounded,
+                          color: Colors.white),
+                      Text('00/00/0000',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(Icons.layers, color: Colors.white),
+                      Text('QUANTIDADE',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+        ))
   ];
-  
+
   late ListView List_Deck;
 
   @override
@@ -53,20 +75,8 @@ class _HomePageState extends State<HomePage> {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
 
-    List_Deck = ListView(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(10.0),
-          child: ExpansionPanelList(
-            expansionCallback: (index, isExpanded) {
-              
-            },
-          ),)
-      ],
-    );
-
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -85,12 +95,49 @@ class _HomePageState extends State<HomePage> {
           topRight: Radius.circular(35),
           bottomRight: Radius.circular(35),
         ),
-        child: Drawer(
-          child: menuScreen()
-        ),
+        child: Drawer(child: MenuPage()),
       ),
-      drawerScrimColor: ThemeController.instance.isdartTheme ? const Color(0xFF2D2D2D) : Colors.white,
-      body: List_Deck,
+      drawerScrimColor: ThemeController.instance.isdartTheme
+          ? const Color(0xFF2D2D2D)
+          : Colors.white,
+      body: ListView(children: [
+        Container(
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: ExpansionPanelList(
+                expandIconColor: Colors.white,
+                expansionCallback: (index, isExpanded) {
+                  setState(() {
+                    decks[index].isExpanded = !decks[index].isExpanded;
+                  });
+                },
+                children: decks.map((Decks deck) {
+                  return ExpansionPanel(
+                    backgroundColor: Colors.purple[900],
+                    headerBuilder: (BuildContext context, bool isExpanded) {
+                      return ListTile(
+                        textColor: Colors.white,
+                        title: Text(
+                          deck.nome,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      );
+                    },
+                    isExpanded: deck.isExpanded,
+                    body: deck.body,
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

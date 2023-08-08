@@ -54,7 +54,7 @@ late String description;
           bottomRight: Radius.circular(35),
         ),
         child: Drawer(
-          child: menuScreen()
+          child: MenuPage()
         ),
       ),
       drawerScrimColor: ThemeController.instance.isdartTheme ? Color(0xFF2D2D2D) : Colors.white,
