@@ -6,6 +6,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth_service.dart';
+
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
 
@@ -20,7 +21,7 @@ class _MenuPage extends State<MenuPage> {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     return Scaffold(
-       body: Container(
+      body: Container(
         width: fem * 280,
         child: Container(
           decoration: const BoxDecoration(
@@ -37,7 +38,8 @@ class _MenuPage extends State<MenuPage> {
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
                 child: Column(
                   children: <Widget>[
                     Text('AKANGÁ',
@@ -59,9 +61,10 @@ class _MenuPage extends State<MenuPage> {
                         color: Colors.white, fontWeight: FontWeight.bold)),
                 onTap: () {
                   Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const EditProfilePage()),
-  );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const EditProfilePage()),
+                  );
                 },
               ),
               ListTile(
@@ -83,7 +86,8 @@ class _MenuPage extends State<MenuPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.bar_chart_rounded, color: Colors.white),
+                leading:
+                    const Icon(Icons.bar_chart_rounded, color: Colors.white),
                 title: const Text("ESTATÍSTICAS",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
@@ -92,7 +96,8 @@ class _MenuPage extends State<MenuPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.app_settings_alt, color: Colors.white),
+                leading:
+                    const Icon(Icons.app_settings_alt, color: Colors.white),
                 title: const Text("CONFIGURAÇÕES",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
@@ -125,7 +130,6 @@ class _MenuPage extends State<MenuPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    
                     FlutterSwitch(
                       width: 60.0,
                       height: 35.0,
@@ -150,10 +154,10 @@ class _MenuPage extends State<MenuPage> {
                       inactiveIcon: Icon(
                         Icons.wb_sunny,
                         color: Colors.white,
-                      ), onToggle: (value) { 
+                      ),
+                      onToggle: (value) {
                         ThemeController.instance.changeTheme();
-                       },
-            
+                      },
                     ),
                   ],
                 ),
@@ -165,4 +169,3 @@ class _MenuPage extends State<MenuPage> {
     );
   }
 }
-
