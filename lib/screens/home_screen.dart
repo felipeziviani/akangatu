@@ -25,16 +25,17 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Lorem ipsum dolor sit amet consectetur\nadipisicing elit. ',
+                  Text(
+                      'Lorem ipsum dolor sit amet consectetur\n adipisicing elit. ',
                       style: TextStyle(
-                        
-                          fontSize: 19,
-                          color: Colors.white,)),
+                        fontSize: 19,
+                        color: Colors.white,
+                      )),
                 ],
               ),
-                      Divider(
-                        color: Colors.transparent,
-                      ),
+              Divider(
+                color: Colors.transparent,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
