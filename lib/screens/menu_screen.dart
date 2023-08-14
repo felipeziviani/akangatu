@@ -60,7 +60,7 @@ class _MenuPage extends State<MenuPage> {
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pop(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const EditProfilePage()),

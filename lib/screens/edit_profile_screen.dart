@@ -17,8 +17,9 @@ class _EditProfilePage extends State<EditProfilePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        forceMaterialTransparency: true,
         iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
       ),
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(

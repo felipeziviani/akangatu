@@ -1,6 +1,7 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/models/decks_model.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
+import 'package:akangatu_project/widgets/new_item_button.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,12 +26,15 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                      'Lorem ipsum dolor sit amet consectetur\n adipisicing elit. ',
-                      style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.white,
-                      )),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                        'Lorem ipsum dolor sit amet consectetur\nadipisicing elit. ',
+                        style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.white,
+                        )),
+                  ),
                 ],
               ),
               Divider(
@@ -40,10 +44,10 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Icon(Icons.access_time_filled_rounded,
                           color: Colors.white),
+                      SizedBox(width: 3),
                       Text('00/00/0000',
                           style: TextStyle(
                               fontSize: 18,
@@ -52,9 +56,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Icon(Icons.layers, color: Colors.white),
+                      SizedBox(width: 2),
                       Text('QUANTIDADE',
                           style: TextStyle(
                               fontSize: 18,
@@ -138,7 +142,29 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: ElevatedButton(                
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                  elevation: 0,
+                ),
+                onPressed: () {
+                  // Respond to button press
+                },
+                child: Text(
+                  "Adicionar Deck's de card",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+            ))
       ]),
+      floatingActionButton: NewItemButton(),
     );
   }
 }
