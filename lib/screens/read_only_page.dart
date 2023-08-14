@@ -64,8 +64,8 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
       padding: const EdgeInsets.all(8),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey.shade200),
+          color: const Color.fromARGB(255, 247, 23, 23),
+          border: Border.all(color: const Color.fromARGB(255, 250, 0, 0)),
         ),
         child: quillEditor,
       ),
