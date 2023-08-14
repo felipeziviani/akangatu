@@ -37,7 +37,7 @@ class AkangaApp extends StatelessWidget {
             primaryColor: Colors.purple.shade900,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: HomePage(),
+          home: AuthCheck(),
         );
       },
     );
