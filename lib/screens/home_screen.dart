@@ -59,11 +59,13 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Icon(Icons.layers, color: Colors.white),
                       SizedBox(width: 2),
-                      Text('QUANTIDADE',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
+                      Text(
+                        'QUANTIDADE',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ],
@@ -144,26 +146,27 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey,
-                  elevation: 0,
-                ),
-                onPressed: () {
-                  // Respond to button press
-                },
-                child: Text(
-                  "Adicionar Deck's de card",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
+          padding: const EdgeInsets.all(10.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey.shade200,
+                elevation: 0,
+              ),
+              onPressed: () {
+                // Respond to button press
+              },
+              child: Text(
+                "Adicionar Deck's de card",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
                 ),
               ),
-            ))
+            ),
+          ),
+        )
       ]),
       floatingActionButton: NewItemButton(),
     );

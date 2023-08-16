@@ -37,37 +37,113 @@ class _NewItemButtonState extends State<NewItemButton> {
       elevation: 8.0,
       children: [
         SpeedDialChild(
-          labelBackgroundColor: Colors.purple.shade900,
-          child: Icon(Icons.ios_share_rounded, color: Colors.white),
-          backgroundColor: Colors.purple.shade900,
-          foregroundColor: Colors.white,
-          label: 'compartilhar deck',
-          labelStyle: TextStyle(fontSize: 18.0, color: Colors.white),
-          onTap: () => (),
-          onLongPress: () => (),
+          labelWidget: GestureDetector(
+            onTap: () {
+              print('AAAAAAAAA');
+            },
+            child: Container(
+              height: 35.0,
+              decoration: BoxDecoration(
+                color: Colors.purple.shade900,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 22.0, right: 5.0),
+                    child: Text(
+                      'DECK COMPARTILHADO',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: Icon(
+                      Icons.file_download_outlined,
+                      color: Colors.white,
+                      size: 23,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
         SpeedDialChild(
-          labelBackgroundColor: Colors.purple.shade900,
-          child: Icon(Icons.add_sharp, color: Colors.white),
-          backgroundColor: Colors.purple.shade900,
-          foregroundColor: Colors.white,
-          label: 'adicionar nota',
-          labelStyle: TextStyle(fontSize: 18.0, color: Colors.white),
-          onTap: () => (),
-          onLongPress: () => (),
+          labelWidget: GestureDetector(
+            onTap: () {
+              print('AAAAAAAAA');
+            },
+            child: Container(
+              height: 35.0,
+              decoration: BoxDecoration(
+                color: Colors.purple.shade900,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 22.0, right: 5.0),
+                    child: Text(
+                      'ADICIONAR CARD',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: Icon(
+                      Icons.add_card_rounded,
+                      color: Colors.white,
+                      size: 22,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
         SpeedDialChild(
-          labelBackgroundColor: Colors.purple.shade900,
-          child: Icon(Icons.layers, color: Colors.white),
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.purple.shade900,
-          label: 'criar deck',
-          labelStyle: TextStyle(fontSize: 18.0, color: Colors.white),
-          onTap: () => (),
-          onLongPress: () => (),
+          labelWidget: GestureDetector(
+            onTap: () {
+              print('AAAAAAAAA');
+            },
+            child: Container(
+              height: 35.0,
+              decoration: BoxDecoration(
+                color: Colors.purple.shade900,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 22.0, right: 5.0),
+                    child: Text(
+                      'ADICIONAR DECK',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: Icon(
+                      Icons.layers_rounded,
+                      color: Colors.white,
+                      size: 23,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
-
-        //add more menu item childs here
       ],
     );
   }

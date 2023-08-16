@@ -68,7 +68,7 @@ class _MenuPage extends State<MenuPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.layers, color: Colors.white),
+                leading: const Icon(Icons.layers_rounded, color: Colors.white),
                 title: const Text("DECKS DE CARDS",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold)),
