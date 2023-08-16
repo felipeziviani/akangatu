@@ -11,13 +11,12 @@ class NewItemButton extends StatefulWidget {
 class _NewItemButtonState extends State<NewItemButton> {
   @override
   Widget build(BuildContext context) {
-
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
 
     return SpeedDial(
       shape: CircleBorder(),
-      iconTheme: IconThemeData(size: 30*fem),
+      iconTheme: IconThemeData(size: 30 * fem),
       icon: Icons.add_rounded,
       activeIcon: Icons.close_rounded,
       gradient: LinearGradient(
@@ -38,31 +37,34 @@ class _NewItemButtonState extends State<NewItemButton> {
       elevation: 8.0,
       children: [
         SpeedDialChild(
-          child: Icon(Icons.accessibility),
-          backgroundColor: Colors.red,
+          labelBackgroundColor: Colors.purple.shade900,
+          child: Icon(Icons.ios_share_rounded, color: Colors.white),
+          backgroundColor: Colors.purple.shade900,
           foregroundColor: Colors.white,
-          label: 'First Menu Child',
-          labelStyle: TextStyle(fontSize: 18.0),
-          onTap: () => print('FIRST CHILD'),
-          onLongPress: () => print('FIRST CHILD LONG PRESS'),
+          label: 'compartilhar deck',
+          labelStyle: TextStyle(fontSize: 18.0, color: Colors.white),
+          onTap: () => (),
+          onLongPress: () => (),
         ),
         SpeedDialChild(
-          child: Icon(Icons.brush),
-          backgroundColor: Colors.blue,
+          labelBackgroundColor: Colors.purple.shade900,
+          child: Icon(Icons.add_sharp, color: Colors.white),
+          backgroundColor: Colors.purple.shade900,
           foregroundColor: Colors.white,
-          label: 'Second Menu Child',
-          labelStyle: TextStyle(fontSize: 18.0),
-          onTap: () => print('SECOND CHILD'),
-          onLongPress: () => print('SECOND CHILD LONG PRESS'),
+          label: 'adicionar nota',
+          labelStyle: TextStyle(fontSize: 18.0, color: Colors.white),
+          onTap: () => (),
+          onLongPress: () => (),
         ),
         SpeedDialChild(
-          child: Icon(Icons.keyboard_voice),
+          labelBackgroundColor: Colors.purple.shade900,
+          child: Icon(Icons.layers, color: Colors.white),
           foregroundColor: Colors.white,
-          backgroundColor: Colors.green,
-          label: 'Third Menu Child',
-          labelStyle: TextStyle(fontSize: 18.0),
-          onTap: () => print('THIRD CHILD'),
-          onLongPress: () => print('THIRD CHILD LONG PRESS'),
+          backgroundColor: Colors.purple.shade900,
+          label: 'criar deck',
+          labelStyle: TextStyle(fontSize: 18.0, color: Colors.white),
+          onTap: () => (),
+          onLongPress: () => (),
         ),
 
         //add more menu item childs here
