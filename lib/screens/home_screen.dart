@@ -1,8 +1,10 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/models/decks_model.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
+import 'package:akangatu_project/widgets/new_deck_dialog.dart';
 import 'package:akangatu_project/widgets/new_item_button.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -151,18 +153,27 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(100),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                fixedSize: Size.fromHeight(fem * 55),
                 backgroundColor: Colors.grey.shade200,
-                elevation: 0,
+                shadowColor: Colors.black,
               ),
               onPressed: () {
-                // Respond to button press
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return NewDeckDialog();
+                  },
+                );
               },
-              child: Text(
-                "Adicionar Deck's de card",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(
+                    Icons.add_rounded,
+                    size: 50,
+                    color: Colors.purple.shade900,
+                  )
+                ],
               ),
             ),
           ),

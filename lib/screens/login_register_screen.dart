@@ -83,7 +83,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
           physics: NeverScrollableScrollPhysics(),
           child: Container(
             child: Stack(
-              children: <Widget>[      
+              children: <Widget>[
                 Container(
                     width: 360 * fem,
                     height: 370 * fem,
@@ -99,31 +99,33 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                       )),
                     )),
                 Container(
-                    margin: new EdgeInsets.symmetric(
-                        horizontal: 35.0 * fem, vertical: 150.0 * fem),
-                    width: 290 * fem,
-                    height: 539 * fem,
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                            boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            spreadRadius: 5,
-                            blurRadius: 4,
-                            offset: Offset(4, 4), // changes position of shadow
-                          ),
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            spreadRadius: 5,
-                            blurRadius: 4,
-                            offset:
-                                Offset(-4, -4), // changes position of shadow
-                          )
-                        ]))),
+                  margin: new EdgeInsets.symmetric(
+                      horizontal: 35.0 * fem, vertical: 150.0 * fem),
+                  width: 290 * fem,
+                  height: 539 * fem,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          spreadRadius: 5,
+                          blurRadius: 4,
+                          offset: Offset(4, 4), // changes position of shadow
+                        ),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          spreadRadius: 5,
+                          blurRadius: 4,
+                          offset: Offset(-4, -4), // changes position of shadow
+                        )
+                      ],
+                    ),
+                  ),
+                ),
                 Container(
                   margin: new EdgeInsets.symmetric(
                       horizontal: 65.0 * fem, vertical: 230.0 * fem),
@@ -331,7 +333,9 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                 return null;
                               },
                             ),
-                            Text(''),
+                            Divider(
+                              color: Colors.transparent,
+                            ),
                             TextFormField(
                               style: TextStyle(
                                 color: Colors.black,
@@ -358,7 +362,9 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                 return null;
                               },
                             ),
-                            Text(''),
+                            Divider(
+                              color: Colors.transparent,
+                            ),
                             TextFormField(
                               style: TextStyle(
                                 color: Colors.black,
@@ -388,7 +394,9 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                 return null;
                               },
                             ),
-                            Text(''),
+                            Divider(
+                              color: Colors.transparent,
+                            ),
                             TextFormField(
                               style: TextStyle(
                                 color: Colors.black,
@@ -477,6 +485,17 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                     ],
                   ),
                 ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 25),
+                    child: Image.asset(
+                      'images/icon/NEON/NeonLogo.png',
+                      width: 120 * fem,
+                      height: 120 * fem,
+                    ),
+                  ),
+                )
               ],
             ),
           ),

@@ -1,3 +1,5 @@
+import 'package:akangatu_project/screens/card_screen.dart';
+import 'package:akangatu_project/widgets/new_deck_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
@@ -75,7 +77,6 @@ class _NewItemButtonState extends State<NewItemButton> {
         SpeedDialChild(
           labelWidget: GestureDetector(
             onTap: () {
-              print('AAAAAAAAA');
             },
             child: Container(
               height: 35.0,
@@ -111,7 +112,12 @@ class _NewItemButtonState extends State<NewItemButton> {
         SpeedDialChild(
           labelWidget: GestureDetector(
             onTap: () {
-              print('AAAAAAAAA');
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return NewDeckDialog();
+                },
+              );
             },
             child: Container(
               height: 35.0,
