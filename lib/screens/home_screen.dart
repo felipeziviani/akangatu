@@ -1,10 +1,10 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/models/decks_model.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
+import 'package:akangatu_project/widgets/akanga_app_bar.dart';
 import 'package:akangatu_project/widgets/new_deck_dialog.dart';
 import 'package:akangatu_project/widgets/new_item_button.dart';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,63 +18,68 @@ class _HomePageState extends State<HomePage> {
 
   List<Decks> decks = <Decks>[
     Decks(
-        false,
-        'DECKCARDS FANTASY \n01',
-        Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                        'Lorem ipsum dolor sit amet consectetur\nadipisicing elit. ',
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.white,
-                        )),
+      false,
+      'DECKCARDS FANTASY \n01',
+      Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    'Lorem ipsum dolor sit amet consectetur\nadipisicing elit. ',
+                    style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.white,
+                    ),
                   ),
-                ],
-              ),
-              Divider(
-                color: Colors.transparent,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      Icon(Icons.access_time_filled_rounded,
-                          color: Colors.white),
-                      SizedBox(width: 3),
-                      Text('00/00/0000',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.layers, color: Colors.white),
-                      SizedBox(width: 2),
-                      Text(
-                        'QUANTIDADE',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Divider(
+              color: Colors.transparent,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Row(
+                  children: [
+                    Icon(Icons.access_time_filled_rounded, color: Colors.white),
+                    SizedBox(width: 3),
+                    Text(
+                      '00/00/0000',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
-        ))
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.layers, color: Colors.white),
+                    SizedBox(width: 2),
+                    Text(
+                      'QUANTIDADE',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    )
   ];
 
   late ListView List_Deck;
@@ -85,21 +90,7 @@ class _HomePageState extends State<HomePage> {
     double fem = MediaQuery.of(context).size.width / baseWidth;
 
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Color.fromRGBO(74, 20, 140, 1),
-                Color.fromRGBO(5, 1, 10, 1),
-              ],
-            ),
-          ),
-        ),
-      ),
+      appBar: AkangaAppBar(),
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(35),

@@ -1,7 +1,5 @@
 import 'package:akangatu_project/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class LoginRegisterPage extends StatefulWidget {
@@ -26,7 +24,6 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
   bool loading = false;
 
   late TabController _tabController;
-  int _currentTabIndex = 0;
 
   @override
   void initState() {
@@ -75,6 +72,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
   Widget build(BuildContext context) {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
+    
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -85,19 +83,20 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
             child: Stack(
               children: <Widget>[
                 Container(
-                    width: 360 * fem,
-                    height: 370 * fem,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          Color.fromRGBO(74, 20, 140, 1),
-                          Color.fromRGBO(5, 1, 10, 1),
-                        ],
-                      )),
+                  width: 360 * fem,
+                  height: 370 * fem,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Color.fromRGBO(74, 20, 140, 1),
+                        Color.fromRGBO(5, 1, 10, 1),
+                      ],
                     )),
+                  ),
+                ),
                 Container(
                   margin: new EdgeInsets.symmetric(
                       horizontal: 35.0 * fem, vertical: 150.0 * fem),
@@ -133,18 +132,19 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                   height: 41 * fem,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Color.fromRGBO(0, 0, 0, 0.08),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50),
+                      color: Color.fromRGBO(0, 0, 0, 0.08),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(50),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.07),
+                          spreadRadius: 3,
+                          blurRadius: 4,
+                          offset: Offset(0, 4), // changes position of shadow
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.07),
-                            spreadRadius: 3,
-                            blurRadius: 4,
-                            offset: Offset(0, 4), // changes position of shadow
-                          ),
-                        ]),
+                      ],
+                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(
                         Radius.circular(50),
@@ -273,18 +273,19 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                     )
                                   : ElevatedButton(
                                       style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                          shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  side: BorderSide(
-                                                      color: Colors
-                                                          .transparent)))),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.transparent),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            side: BorderSide(
+                                                color: Colors.transparent),
+                                          ),
+                                        ),
+                                      ),
                                       onPressed: () {
                                         if (loginFormKey.currentState!
                                             .validate()) {
@@ -321,10 +322,11 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                     color: Color.fromRGBO(0, 0, 0, 0.5),
                                     fontWeight: FontWeight.bold),
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                  color: Color(0xFF4A148C),
-                                  width: 2,
-                                )),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF4A148C),
+                                    width: 2,
+                                  ),
+                                ),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -380,10 +382,11 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                     color: Color.fromRGBO(0, 0, 0, 0.5),
                                     fontWeight: FontWeight.bold),
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                  color: Color(0xFF4A148C),
-                                  width: 2,
-                                )),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF4A148C),
+                                    width: 2,
+                                  ),
+                                ),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -412,10 +415,11 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                     color: Color.fromRGBO(0, 0, 0, 0.5),
                                     fontWeight: FontWeight.bold),
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                  color: Color(0xFF4A148C),
-                                  width: 2,
-                                )),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF4A148C),
+                                    width: 2,
+                                  ),
+                                ),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
