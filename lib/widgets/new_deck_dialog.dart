@@ -1,5 +1,7 @@
+import 'package:akangatu_project/services/deck_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class NewDeckDialog extends StatefulWidget {
   const NewDeckDialog({super.key});
@@ -9,6 +11,29 @@ class NewDeckDialog extends StatefulWidget {
 }
 
 class _NewDeckDialogState extends State<NewDeckDialog> {
+  final deckFormKey = GlobalKey<FormState>();
+  final newName = TextEditingController();
+  final newDescription = TextEditingController();
+
+  bool loading = false;
+
+  newDeck() async {
+    try {
+      setState(() => loading = true);
+      await context
+          .read<DeckService>()
+          .newDeck(newName.text, newDescription.text);
+    } on Exception catch (e) {
+      setState(() => loading = false);
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   behavior: SnackBarBehavior.floating,
+      //   content: Text(e.toString(),
+      //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+      //   backgroundColor: Colors.deepPurple,
+      // ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
@@ -48,9 +73,11 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
       content: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
+          key: deckFormKey,
           child: Column(
             children: <Widget>[
               TextFormField(
+                controller: newName,
                 inputFormatters: [
                   new LengthLimitingTextInputFormatter(24),
                 ],
@@ -74,11 +101,17 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
                     ),
                   ),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Informe o nome do Deck!';
+                  }
+                },
               ),
               Divider(
                 color: Colors.transparent,
               ),
               TextFormField(
+                controller: newDescription,
                 inputFormatters: [
                   new LengthLimitingTextInputFormatter(64),
                 ],
@@ -128,37 +161,37 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
               ),
               width: 150 * fem,
               height: 40 * fem,
-              child: //(loading)
-                  // ? Padding(
-                  //     padding:
-                  //         EdgeInsets.symmetric(vertical: 15, horizontal: 93),
-                  //     child: CircularProgressIndicator(
-                  //       color: Colors.white,
-                  //     ),
-                  //   )
-                  // :
-                  ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.transparent),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      side: BorderSide(color: Colors.transparent),
+              child: (loading)
+                  ? Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 93),
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                    )
+                  : ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            side: BorderSide(color: Colors.transparent),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        newDeck();
+                      },
+                      child: Text(
+                        'CRIAR DECK',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ),
-                onPressed: () {
-                  print('AAAAAAA');
-                },
-                child: Text(
-                  'CRIAR DECK',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
             ),
           ],
         ),

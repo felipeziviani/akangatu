@@ -29,13 +29,13 @@ class _EditProfilePage extends State<EditProfilePage> {
         forceMaterialTransparency: true,
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      drawer: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(35),
-          bottomRight: Radius.circular(35),
-        ),
-        child: Drawer(child: MenuPage()),
-      ),
+      // drawer: ClipRRect(
+      //   borderRadius: BorderRadius.only(
+      //     topRight: Radius.circular(35),
+      //     bottomRight: Radius.circular(35),
+      //   ),
+      //   child: Drawer(child: MenuPage()),
+      // ),
       drawerScrimColor: ThemeController.instance.isdartTheme
           ? const Color(0xFF2D2D2D)
           : Colors.white,

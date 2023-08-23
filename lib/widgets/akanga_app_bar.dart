@@ -1,4 +1,5 @@
 import 'package:akangatu_project/screens/home_screen.dart';
+import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 
 class AkangaAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -10,6 +11,13 @@ class AkangaAppBar extends StatelessWidget implements PreferredSizeWidget {
     double fem = MediaQuery.of(context).size.width / baseWidth;
 
     return AppBar(
+      // title: IconButton(
+      //   icon: Icon(Icons.menu_rounded),
+      //   iconSize: 24,
+      //   color: Colors.white,
+      //   onPressed: () => Navigator.pushReplacement(
+      //       context, MaterialPageRoute(builder: (context) => const MenuPage())),
+      // ),
       iconTheme: IconThemeData(color: Colors.white),
       flexibleSpace: Container(
         decoration: const BoxDecoration(
@@ -37,7 +45,7 @@ class AkangaAppBar extends StatelessWidget implements PreferredSizeWidget {
               image: AssetImage('images/icon/NEON/NeonMinimalist.png'),
               width: 40 * fem,
               height: 40 * fem,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
         ),

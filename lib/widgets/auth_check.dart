@@ -16,10 +16,12 @@ class _AuthCheckState extends State<AuthCheck> {
   Widget build(BuildContext context) {
     AuthService auth = Provider.of<AuthService>(context);
 
-    if(auth.isLoading)
+    if (auth.isLoading)
       return loading();
-    else if (auth.usuario == null) return LoginRegisterPage();
-    else return HomePage();
+    else if (auth.usuario == null)
+      return LoginRegisterPage();
+    else
+      return HomePage();
   }
 
   loading() {

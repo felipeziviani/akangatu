@@ -1,5 +1,6 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/services/auth_service.dart';
+import 'package:akangatu_project/services/deck_service.dart';
 import 'package:akangatu_project/widgets/auth_check.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(create: (context) => DeckService()),
       ],
       child: AkangaApp(),
     ),
