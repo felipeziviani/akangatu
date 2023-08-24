@@ -42,7 +42,7 @@ class AkangaAppBar extends StatelessWidget implements PreferredSizeWidget {
               );
             },
             child: Ink.image(
-              image: AssetImage('images/icon/NEON/NeonMinimalist.png'),
+              image: AssetImage('images/icon/WHITE/WhiteMinimalist.png'),
               width: 40 * fem,
               height: 40 * fem,
               fit: BoxFit.fill,

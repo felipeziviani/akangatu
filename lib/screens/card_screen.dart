@@ -2,6 +2,7 @@ import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
+import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 
 class CardPage extends StatefulWidget {
   const CardPage({super.key});
@@ -43,9 +44,14 @@ class _CardPageState extends State<CardPage> {
             padding: const EdgeInsets.only(left: 50.0, top: 50.0),
             child: Row(
               children: [
-                Icon(Icons.layers, color: Colors.purple.shade900,),
+                Icon(
+                  Icons.layers,
+                  color: Colors.purple.shade900,
+                ),
                 SizedBox(width: 3),
-                Text('DECK ATUAL:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                Text('DECK ATUAL:',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               ],
             ),
           ),
@@ -61,7 +67,7 @@ class _CardPageState extends State<CardPage> {
             ),
           ),
           SizedBox(
-            height: 40,           
+            height: 40,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -82,18 +88,22 @@ class _CardPageState extends State<CardPage> {
                     child: ListView(children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15),
-                        child: Column(
-                          children: [
+                        child: Column(children: [
                           QuillToolbar.basic(
+                            multiRowsDisplay: false,
+                            showIndent: false,
+                            showLeftAlignment: true,
                             controller: _controller,
                             toolbarIconSize: 17,
                             iconTheme: QuillIconTheme(
-                              borderRadius: 14,
-                              iconSelectedFillColor: Color.fromARGB(255, 0, 0, 0),
+                              borderRadius: 4,
+                              iconSelectedFillColor: Colors.purple.shade900,
                               iconUnselectedFillColor:
-                                  Color.fromRGBO(136, 60, 230, 1),
-                              iconUnselectedColor: Color.fromARGB(255, 31, 26, 26),
-                              iconSelectedColor: Color.fromRGBO(255, 255, 255, 1),
+                                  Color.fromRGBO(255, 255, 255, 1),
+                              iconUnselectedColor:
+                                  Color.fromARGB(255, 31, 26, 26),
+                              iconSelectedColor:
+                                  Color.fromRGBO(255, 255, 255, 1),
                             ),
                           ),
                           QuillEditor.basic(

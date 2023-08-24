@@ -91,6 +91,9 @@ flutter:
    - images/icon/COLORFUL/ColorfulLogo.png
    - images/icon/NEON/NeonLogo.png
    - images/icon/NEON/NeonMinimalist.png
+   - images/icon/WHITE/WhiteMinimalist.png
+   
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
