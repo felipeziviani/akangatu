@@ -1,4 +1,3 @@
-import 'package:akangatu_project/models/decks_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +7,7 @@ class DeckException implements Exception {
 }
 
 class DeckService extends ChangeNotifier {
-  var _collection = FirebaseFirestore.instance.collection('decks');
-  Decks? deck;
+  CollectionReference _collection = FirebaseFirestore.instance.collection('decks');
   bool isLoading = true;
 
   _getDecks() {

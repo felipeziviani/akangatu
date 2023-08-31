@@ -16,8 +16,19 @@ class MenuPage extends StatefulWidget {
   State<MenuPage> createState() => _MenuPage();
 }
 
+final MaterialStateProperty<Icon?> thumbIcon =
+    MaterialStateProperty.resolveWith<Icon?>(
+  (Set<MaterialState> states) {
+    if (states.contains(MaterialState.selected)) {
+      return const Icon(Icons.wb_sunny_rounded, color: Colors.white);
+    }
+    return const Icon(Icons.nightlight_round, color: Colors.white);
+  },
+);
+
 class _MenuPage extends State<MenuPage> {
-  bool hover = true;
+  bool light = true;
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
@@ -90,11 +101,11 @@ class _MenuPage extends State<MenuPage> {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const EditProfilePage()),
-                      );
+                      //   Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const EditProfilePage()),
+                      //   );
                     },
                   ),
                   ListTile(
@@ -163,35 +174,55 @@ class _MenuPage extends State<MenuPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        FlutterSwitch(
-                          width: 60.0,
-                          height: 35.0,
-                          toggleSize: 25.0,
+                        // FlutterSwitch(
+                        //   width: 60.0,
+                        //   height: 35.0,
+                        //   toggleSize: 25.0,
+                        //   value: ThemeController.instance.isdartTheme,
+                        //   borderRadius: 30.0,
+                        //   padding: 2.0,
+                        //   activeToggleColor: Color(0xFF6E40C9),
+                        //   inactiveToggleColor: Color(0xFF6E40C9),
+                        //   activeSwitchBorder: Border.all(
+                        //     color: Color(0xFF3C1E70),
+                        //   ),
+                        //   inactiveSwitchBorder: Border.all(
+                        //     color: Color(0xFF3C1E70),
+                        //   ),
+                        //   activeColor: Color(0xFF271052),
+                        //   inactiveColor: Color(0xFF271052),
+                        //   activeIcon: Icon(
+                        //     Icons.nightlight_round,
+                        //     color: Colors.white,
+                        //   ),
+                        //   inactiveIcon: Icon(
+                        //     Icons.wb_sunny,
+                        //     color: Colors.white,
+                        //   ),
+                        //   onToggle: (value) {
+                        //     ThemeController.instance.changeTheme();
+                        //   },
+                        // ),
+                        Switch(
                           value: ThemeController.instance.isdartTheme,
-                          borderRadius: 30.0,
-                          padding: 2.0,
-                          activeToggleColor: Color(0xFF6E40C9),
-                          inactiveToggleColor: Color(0xFF6E40C9),
-                          activeSwitchBorder: Border.all(
-                            color: Color(0xFF3C1E70),
-                          ),
-                          inactiveSwitchBorder: Border.all(
-                            color: Color(0xFF3C1E70),
-                          ),
-                          activeColor: Color(0xFF271052),
-                          inactiveColor: Color(0xFF271052),
-                          activeIcon: Icon(
-                            Icons.nightlight_round,
-                            color: Colors.white,
-                          ),
-                          inactiveIcon: Icon(
-                            Icons.wb_sunny,
-                            color: Colors.white,
-                          ),
-                          onToggle: (value) {
+                          thumbIcon: thumbIcon,
+                          inactiveThumbColor: Colors.purple.shade900,
+                          inactiveTrackColor:
+                              Colors.purple.shade900.withOpacity(0.10),
+                          activeColor: Colors.purple.shade900,
+                          onChanged: (bool value) {
                             ThemeController.instance.changeTheme();
                           },
-                        ),
+                          trackOutlineColor: MaterialStateProperty.resolveWith(
+                            (final Set<MaterialState> states) {
+                              if (states.contains(MaterialState.selected)) {
+                                return null;
+                              }
+
+                              return Colors.purple.shade900;
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),

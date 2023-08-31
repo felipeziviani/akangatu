@@ -38,6 +38,7 @@ class AkangaApp extends StatelessWidget {
           title: 'AKANGÁ',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+            useMaterial3: true,
             brightness: ThemeController.instance.isdartTheme ? Brightness.dark : Brightness.light,
             primaryColor: Colors.purple.shade900,
             primarySwatch: Colors.purple,

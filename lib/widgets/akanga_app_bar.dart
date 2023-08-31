@@ -11,13 +11,6 @@ class AkangaAppBar extends StatelessWidget implements PreferredSizeWidget {
     double fem = MediaQuery.of(context).size.width / baseWidth;
 
     return AppBar(
-      // title: IconButton(
-      //   icon: Icon(Icons.menu_rounded),
-      //   iconSize: 24,
-      //   color: Colors.white,
-      //   onPressed: () => Navigator.pushReplacement(
-      //       context, MaterialPageRoute(builder: (context) => const MenuPage())),
-      // ),
       iconTheme: IconThemeData(color: Colors.white),
       flexibleSpace: Container(
         decoration: const BoxDecoration(
@@ -42,10 +35,9 @@ class AkangaAppBar extends StatelessWidget implements PreferredSizeWidget {
               );
             },
             child: Ink.image(
-              image: AssetImage('images/icon/WHITE/WhiteMinimalist.png'),
-              width: 40 * fem,
-              height: 40 * fem,
-              fit: BoxFit.fill,
+              image: AssetImage('images/icon/NEON/NeonMinimalist.png'),
+              width: 35 * fem,
+              height: 35 * fem,
             ),
           ),
         ),
