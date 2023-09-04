@@ -3,11 +3,13 @@ import 'package:akangatu_project/models/decks_model.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/deck_get_description_service.dart';
 import 'package:akangatu_project/services/deck_get_name_service.dart';
+import 'package:akangatu_project/services/deck_service.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
 import 'package:akangatu_project/widgets/new_deck_dialog.dart';
 import 'package:akangatu_project/widgets/new_item_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,6 +31,12 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         );
+  }
+
+  getDesc(String docId) async {
+    await context
+          .read<DeckService>()
+          .getDescription(documentId: docId);
   }
 
   List<Decks> decks = <Decks>[Decks(false, '', Container())];
@@ -93,16 +101,7 @@ class _HomePageState extends State<HomePage> {
                                         padding: const EdgeInsets.all(10),
                                         child: SizedBox(
                                           width: 300 * fem,
-                                          child: RichText(
-                                              textWidthBasis:
-                                                  TextWidthBasis.longestLine,
-                                              text: TextSpan(
-                                                style:TextStyle(
-                                                  fontSize: 19,
-                                                  color: Colors.white,
-                                                ),
-                                                  text: '"Amo como ama o amor. Não conheço nenhuma outra razão para amar senão amar. Que queres que te diga, além de que te amo, se o que quero dizer-te é que te amo?" - Fernando Pessoa'),
-                                        ),
+                                          child: getDesc(docIds[index]),
                                       ),
                                   )],
                                   ),
@@ -161,3 +160,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+

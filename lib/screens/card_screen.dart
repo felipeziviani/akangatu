@@ -2,6 +2,7 @@ import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
+import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 
 class CardPage extends StatefulWidget {
@@ -27,6 +28,8 @@ class _CardPageState extends State<CardPage> {
   bool status = false;
   @override
   Widget build(BuildContext context) {
+    double baseWidht = 360;
+    double fem = MediaQuery.of(context).size.width / baseWidht;
     return Flexible(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -51,8 +54,8 @@ class _CardPageState extends State<CardPage> {
                     ),
                     SizedBox(width: 3),
                     Text('DECK ATUAL:',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   ],
                 ),
               ),
@@ -73,29 +76,29 @@ class _CardPageState extends State<CardPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Swiper(
-                    itemWidth: 400,
-                    itemHeight: 225,
-                    loop: true,
-                    duration: 1200,
-                    scrollDirection: Axis.vertical, //direção de deslizar
-                    itemBuilder: (context, index) {
-                      return Container(
-                        width: 400,
-                        height: 400,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color.fromARGB(255, 255, 0, 0)),
-                        ),
-                        // BoxDecoration(
-                        //image: DecorationImage(image: AssetImage(imagepath[index])),
-                        // borderRadius: BorderRadius.circular(20),
-                        //),
-                      );
-                    },
-                    itemCount: 2,
-                  ),
+            //   Swiper(
+            //   itemWidth: 400,
+            //   itemHeight: 225,
+            //   loop: true,
+            //   duration: 1200,
+            //   scrollDirection: Axis.vertical, //direção de deslizar
+            //   itemBuilder: (context, index) {
+            //     return Container(
+            //       width: 400,
+            //       height: 400,
+            //       child: Container(
+            //         decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(10),
+            //             color: Color.fromARGB(255, 255, 0, 0)),
+            //       ),
+            //       // BoxDecoration(
+            //       //image: DecorationImage(image: AssetImage(imagepath[index])),
+            //       // borderRadius: BorderRadius.circular(20),
+            //       //),
+            //     );
+            //   },
+            //   itemCount: 2,
+            // ),
                   Container(
                     width: 330,
                     height: 200,
