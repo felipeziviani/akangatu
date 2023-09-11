@@ -1,12 +1,9 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/screens/card_screen.dart';
-import 'package:akangatu_project/screens/edit_profile_screen.dart';
 import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:provider/provider.dart';
-import '../services/auth_service.dart';
+import 'edit_profile_screen.dart';
 import 'login_register_screen.dart';
 
 class MenuPage extends StatefulWidget {
@@ -20,12 +17,11 @@ final MaterialStateProperty<Icon?> thumbIcon =
     MaterialStateProperty.resolveWith<Icon?>(
   (Set<MaterialState> states) {
     if (states.contains(MaterialState.selected)) {
-      return const Icon(Icons.wb_sunny_rounded, color: Colors.white);
+      return const Icon(Icons.nightlight_round, color: Colors.white);
     }
-    return const Icon(Icons.nightlight_round, color: Colors.white);
+    return const Icon(Icons.wb_sunny_rounded, color: Colors.white);
   },
 );
-
 class _MenuPage extends State<MenuPage> {
   bool light = true;
 
@@ -101,11 +97,11 @@ class _MenuPage extends State<MenuPage> {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
-                      //   Navigator.pushReplacement(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const EditProfilePage()),
-                      //   );
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const EditProfilePage()),
+                        );
                     },
                   ),
                   ListTile(

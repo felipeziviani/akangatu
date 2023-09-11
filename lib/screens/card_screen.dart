@@ -2,8 +2,6 @@ import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
-import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
-import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 
 class CardPage extends StatefulWidget {
   const CardPage({super.key});
@@ -29,6 +27,7 @@ class _CardPageState extends State<CardPage> {
   @override
   Widget build(BuildContext context) {
     double baseWidht = 360;
+    // ignore: unused_local_variable
     double fem = MediaQuery.of(context).size.width / baseWidht;
     return Flexible(
       child: Padding(

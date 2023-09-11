@@ -23,6 +23,7 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
       await context
           .read<DeckService>()
           .newDeck(newName.text, newDescription.text);
+    // ignore: unused_catch_clause
     } on Exception catch (e) {
       setState(() => loading = false);
       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -101,6 +102,7 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
                     ),
                   ),
                 ),
+                // ignore: body_might_complete_normally_nullable
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Informe o nome do Deck!';

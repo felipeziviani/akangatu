@@ -1,5 +1,4 @@
 import 'package:akangatu_project/screens/home_screen.dart';
-import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 
 class AkangaAppBar extends StatelessWidget implements PreferredSizeWidget {

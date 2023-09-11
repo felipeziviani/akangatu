@@ -19,9 +19,24 @@ class _EditProfilePage extends State<EditProfilePage> {
     final editFormKey = GlobalKey<FormState>();
     final editName = TextEditingController();
     final editEmail = TextEditingController();
-    final editSenhaAtual = TextEditingController();
-    final editSenhaNova = TextEditingController();
+    final editSenha = TextEditingController();
     final editConfirmarSenhaNova = TextEditingController();
+    
+    bool _NameValid = true;
+    bool _EmailValid = true;
+    bool _SenhaValid = true;
+
+    UpdateProfile(){
+    setState((){
+      editName.text.trim().length < 10 || editName.text.isEmpty ? _NameValid = false : _NameValid = true;
+      editEmail.text.trim().length < 256 || editEmail.text.isEmpty ? _EmailValid = false : _EmailValid = true;
+      editSenha.text.trim().length < 256 || editSenha.text.isEmpty ? _SenhaValid = false : _SenhaValid = true;
+    });
+    
+    if (_NameValid && _EmailValid && _SenhaValid) {
+      users.document(widget.cu)
+    };
+  }
 
     return Scaffold(
       extendBodyBehindAppBar: true,

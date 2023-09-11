@@ -33,12 +33,6 @@ class _HomePageState extends State<HomePage> {
         );
   }
 
-  getDesc(String docId) async {
-    await context
-          .read<DeckService>()
-          .getDescription(documentId: docId);
-  }
-
   List<Decks> decks = <Decks>[Decks(false, '', Container())];
 
   late ListView List_Deck;
@@ -101,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                                         padding: const EdgeInsets.all(10),
                                         child: SizedBox(
                                           width: 300 * fem,
-                                          child: getDesc(docIds[index]),
+                                          child: GetDeckDescription(documentId: docIds[index]),
                                       ),
                                   )],
                                   ),

@@ -13,6 +13,7 @@ class AuthService extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
   User? usuario;
   bool isLoading = true;
+  bool _Validad = true;
 
   AuthService() {
     _authCheck();
@@ -31,6 +32,8 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   registrar(String nome, String email, String senha) async {
     String senhaMd5 = md5.convert(utf8.encode(senha)).toString();
     try {
@@ -39,6 +42,7 @@ class AuthService extends ChangeNotifier {
           .then((UserCredential userCredential) {
             userCredential.user!.updateDisplayName(nome);
           })
+          // ignore: argument_type_not_assignable_to_error_handler
           .catchError((FirebaseAuthException FirebaseAuthException) {})
           .then((value) {
             CollectionReference users =

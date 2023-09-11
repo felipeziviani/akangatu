@@ -5,9 +5,9 @@ class DeckException implements Exception {
   String message;
   DeckException(this.message);
 }
-
+CollectionReference _collection = FirebaseFirestore.instance.collection('decks');
 class DeckService extends ChangeNotifier {
-  CollectionReference _collection = FirebaseFirestore.instance.collection('decks');
+  
   bool isLoading = true;
 
   _getDecks() {
@@ -31,7 +31,28 @@ class DeckService extends ChangeNotifier {
     }
   }
 
-  getDescription ({required String documentId}) {
+  // getDescription ({required String documentId}) async {
+  //   return FutureBuilder(
+  //     future: _collection.doc(documentId).get(),
+  //     builder: (context, snapshot) {
+  //       if (snapshot.connectionState == ConnectionState.done) {
+  //         Map<String, dynamic> data =
+  //             snapshot.data!.data() as Map<String, dynamic>;
+  //         return data['description'];
+  //       }
+  //       return CircularProgressIndicator();
+  //     },
+  //   );
+  // }
+}
+
+class GetDeckDescription extends StatelessWidget {
+  final String documentId;
+
+  GetDeckDescription({required this.documentId});
+
+  @override
+  Widget build(BuildContext context) {
     return FutureBuilder(
       future: _collection.doc(documentId).get(),
       builder: (context, snapshot) {
@@ -48,6 +69,33 @@ class DeckService extends ChangeNotifier {
               text: '${data['description']}',
             ),
           );
+        }
+        return CircularProgressIndicator();
+      },
+    );
+  }
+}
+
+class GetDeckName extends StatelessWidget {
+  final String documentId;
+
+  GetDeckName({required this.documentId});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return FutureBuilder(
+      future: _collection.doc(documentId).get(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+          return Text('${data['name']}',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ));
         }
         return CircularProgressIndicator();
       },
