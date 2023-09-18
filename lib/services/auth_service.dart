@@ -13,7 +13,6 @@ class AuthService extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
   User? usuario;
   bool isLoading = true;
-  bool _Validad = true;
   var uid;
 
   AuthService() {

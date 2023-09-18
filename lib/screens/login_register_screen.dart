@@ -1,5 +1,4 @@
 import 'package:akangatu_project/services/auth_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -270,23 +269,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                   ? Padding(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 15, horizontal: 93),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              CircularProgressIndicator(),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                      child: CircularProgressIndicator(),
                                     )
                                   : ElevatedButton(
                                       style: ButtonStyle(
@@ -467,23 +450,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                   ? Padding(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 15, horizontal: 81),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              CircularProgressIndicator(),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                      child: CircularProgressIndicator(),
                                     )
                                   : ElevatedButton(
                                       style: ButtonStyle(

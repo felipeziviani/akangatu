@@ -23,7 +23,6 @@ class DeckService extends ChangeNotifier {
     try {
       await _collection.add({
         'name': name,
-        'description': description,
       });
       _getDecks();
     } on FirebaseException catch (e) {
@@ -35,19 +34,6 @@ class DeckService extends ChangeNotifier {
     }
   }
 
-  // getDescription ({required String documentId}) async {
-  //   return FutureBuilder(
-  //     future: _collection.doc(documentId).get(),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.connectionState == ConnectionState.done) {
-  //         Map<String, dynamic> data =
-  //             snapshot.data!.data() as Map<String, dynamic>;
-  //         return data['description'];
-  //       }
-  //       return CircularProgressIndicator();
-  //     },
-  //   );
-  // }
 }
 class GetDeckName extends StatelessWidget {
   final String documentId;

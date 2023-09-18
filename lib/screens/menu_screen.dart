@@ -1,5 +1,5 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
-import 'package:akangatu_project/screens/card_screen.dart';
+import 'package:akangatu_project/screens/frente_screen.dart';
 import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

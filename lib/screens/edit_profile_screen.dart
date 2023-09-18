@@ -19,7 +19,6 @@ class _EditProfilePage extends State<EditProfilePage> {
     final editFormKey = GlobalKey<FormState>();
     final editName = TextEditingController();
     final editEmail = TextEditingController();
-    final editSenha = TextEditingController();
     final editSenhaAtual = TextEditingController();
     final editSenhaNova = TextEditingController();
     final editConfirmarSenhaNova = TextEditingController();

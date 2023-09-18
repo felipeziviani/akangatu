@@ -1,8 +1,8 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
-import 'package:akangatu_project/models/decks_model.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/deck_service.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
+import 'package:akangatu_project/widgets/edit_deck_dialog.dart';
 import 'package:akangatu_project/widgets/new_item_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,8 +36,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 360;
-    double fem = MediaQuery.of(context).size.width / baseWidth;
     return Scaffold(
       appBar: AkangaAppBar(),
       drawer: ClipRRect(
@@ -73,7 +71,12 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.white,
                                 iconSize: 24,
                                 onPressed: () {
-                                  print('aaaaa');
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return EditDeckDialog();
+                                    },
+                                  );
                                 },
                               ),
                               textColor: Colors.white,
