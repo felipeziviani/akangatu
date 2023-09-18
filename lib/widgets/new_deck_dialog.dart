@@ -23,7 +23,8 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
       await context
           .read<DeckService>()
           .newDeck(newName.text, newDescription.text);
-    // ignore: unused_catch_clause
+      setState(() => loading = false);
+      // ignore: unused_catch_clause
     } on Exception catch (e) {
       setState(() => loading = false);
       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -112,32 +113,6 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
               Divider(
                 color: Colors.transparent,
               ),
-              TextFormField(
-                controller: newDescription,
-                inputFormatters: [
-                  new LengthLimitingTextInputFormatter(64),
-                ],
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.more_rounded,
-                    color: Color(0xFF4A148C),
-                    size: 20,
-                  ),
-                  hintText: 'Descrição',
-                  hintStyle: TextStyle(
-                      color: Color.fromRGBO(0, 0, 0, 0.5),
-                      fontWeight: FontWeight.bold),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xFF4A148C),
-                      width: 2,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -166,9 +141,19 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
               child: (loading)
                   ? Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 93),
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 3,
+                              )),
+                        ],
                       ),
                     )
                   : ElevatedButton(
@@ -185,6 +170,7 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
                       ),
                       onPressed: () {
                         newDeck();
+                        Navigator.pop(context);
                       },
                       child: Text(
                         'CRIAR DECK',

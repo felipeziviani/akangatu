@@ -14,6 +14,7 @@ class AuthService extends ChangeNotifier {
   User? usuario;
   bool isLoading = true;
   bool _Validad = true;
+  var uid;
 
   AuthService() {
     _authCheck();
@@ -31,8 +32,6 @@ class AuthService extends ChangeNotifier {
     usuario = _auth.currentUser;
     notifyListeners();
   }
-
-
 
   registrar(String nome, String email, String senha) async {
     String senhaMd5 = md5.convert(utf8.encode(senha)).toString();

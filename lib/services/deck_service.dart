@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DeckException implements Exception {
   String message;
   DeckException(this.message);
 }
-CollectionReference _collection = FirebaseFirestore.instance.collection('decks');
+
+  var userId = FirebaseAuth.instance.currentUser!.uid;
+CollectionReference _collection =
+    FirebaseFirestore.instance.collection('decks_${userId}');
+
 class DeckService extends ChangeNotifier {
-  
   bool isLoading = true;
 
   _getDecks() {
@@ -45,37 +49,6 @@ class DeckService extends ChangeNotifier {
   //   );
   // }
 }
-
-class GetDeckDescription extends StatelessWidget {
-  final String documentId;
-
-  GetDeckDescription({required this.documentId});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _collection.doc(documentId).get(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-          return RichText(
-            textWidthBasis: TextWidthBasis.longestLine,
-            text: TextSpan(
-              style: TextStyle(
-                fontSize: 19,
-                color: Colors.white,
-              ),
-              text: '${data['description']}',
-            ),
-          );
-        }
-        return CircularProgressIndicator();
-      },
-    );
-  }
-}
-
 class GetDeckName extends StatelessWidget {
   final String documentId;
 
@@ -83,7 +56,6 @@ class GetDeckName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return FutureBuilder(
       future: _collection.doc(documentId).get(),
       builder: (context, snapshot) {
@@ -97,7 +69,13 @@ class GetDeckName extends StatelessWidget {
                 fontSize: 20.0,
               ));
         }
-        return CircularProgressIndicator();
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CircularProgressIndicator(),
+          ],
+        );
       },
     );
   }

@@ -74,30 +74,7 @@ class _CardPageState extends State<CardPage> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-            //   Swiper(
-            //   itemWidth: 400,
-            //   itemHeight: 225,
-            //   loop: true,
-            //   duration: 1200,
-            //   scrollDirection: Axis.vertical, //direção de deslizar
-            //   itemBuilder: (context, index) {
-            //     return Container(
-            //       width: 400,
-            //       height: 400,
-            //       child: Container(
-            //         decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(10),
-            //             color: Color.fromARGB(255, 255, 0, 0)),
-            //       ),
-            //       // BoxDecoration(
-            //       //image: DecorationImage(image: AssetImage(imagepath[index])),
-            //       // borderRadius: BorderRadius.circular(20),
-            //       //),
-            //     );
-            //   },
-            //   itemCount: 2,
-            // ),
+              ),
                   Container(
                     width: 330,
                     height: 200,
@@ -142,10 +119,9 @@ class _CardPageState extends State<CardPage> {
                   ),
                 ],
               ),
-            ],
           ),
         ),
-      ),
-    );
+      );
+    
   }
 }

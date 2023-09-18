@@ -1,4 +1,5 @@
 import 'package:akangatu_project/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,8 @@ class LoginRegisterPage extends StatefulWidget {
 
 class _LoginRegisterPageState extends State<LoginRegisterPage>
     with SingleTickerProviderStateMixin {
+  // String currentUser = (AuthService()._auth.currentUser as User).email.toString();
+
   final loginFormKey = GlobalKey<FormState>();
   final loginEmail = TextEditingController();
   final loginSenha = TextEditingController();
@@ -267,8 +270,22 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                   ? Padding(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 15, horizontal: 93),
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              CircularProgressIndicator(),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     )
                                   : ElevatedButton(
@@ -450,8 +467,22 @@ class _LoginRegisterPageState extends State<LoginRegisterPage>
                                   ? Padding(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 15, horizontal: 81),
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              CircularProgressIndicator(),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     )
                                   : ElevatedButton(
