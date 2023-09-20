@@ -55,7 +55,7 @@ class _CardPageState extends State<CardPage> {
                     SizedBox(width: 3),
                     Text('DECK ATUAL:',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
+                            fontWeight: FontWeight.bold, fontSize: 18)),
                   ],
                 ),
               ),
@@ -65,40 +65,29 @@ class _CardPageState extends State<CardPage> {
                 indent: 40,
                 endIndent: 35,
               ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Padding(
+                padding: const EdgeInsets.only(top: 35.0, 
+                //bottom: 20.0
                 ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('ㅤFRENTE CARDㅤ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 115, 32, 215),
+                            backgroundColor:Color.fromARGB(235, 235, 235, 235)),
+                            
+                            
+                          )],
+                          
+                    ),
               ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //   Swiper(
-                  //   itemWidth: 400,
-                  //   itemHeight: 225,
-                  //   loop: true,
-                  //   duration: 1200,
-                  //   scrollDirection: Axis.vertical, //direção de deslizar
-                  //   itemBuilder: (context, index) {
-                  //     return Container(
-                  //       width: 400,
-                  //       height: 400,
-                  //       child: Container(
-                  //         decoration: BoxDecoration(
-                  //             borderRadius: BorderRadius.circular(10),
-                  //             color: Color.fromARGB(255, 255, 0, 0)),
-                  //       ),
-                  //       // BoxDecoration(
-                  //       //image: DecorationImage(image: AssetImage(imagepath[index])),
-                  //       // borderRadius: BorderRadius.circular(20),
-                  //       //),
-                  //     );
-                  //   },
-                  //   itemCount: 2,
-                  // ),
                   Container(
                     width: 330,
                     height: 200,
@@ -110,35 +99,29 @@ class _CardPageState extends State<CardPage> {
                         borderRadius: BorderRadius.circular(15),
                         color: Color.fromARGB(234, 255, 255, 255)),
                     child: SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 17),
-                        child: ListView(children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Column(children: [
-                              QuillToolbar.basic(
-                                multiRowsDisplay: false,
-                                showIndent: false,
-                                showLeftAlignment: true,
-                                controller: _controller,
-                                toolbarIconSize: 17,
-                                iconTheme: QuillIconTheme(
-                                  borderRadius: 4,
-                                  iconSelectedFillColor: Colors.purple.shade900,
-                                  iconUnselectedFillColor:
-                                      Color.fromRGBO(255, 255, 255, 1),
-                                  iconUnselectedColor:
-                                      Color.fromARGB(255, 31, 26, 26),
-                                  iconSelectedColor:
-                                      Color.fromRGBO(255, 255, 255, 1),
-                                ),
-                              ),
-                              QuillEditor.basic(
-                                  controller: _controller, readOnly: false),
-                            ]),
-                          )
-                        ]),
-                      ),
+                      child: ListView(children: <Widget>[
+                        Column(children: [
+                          QuillToolbar.basic(
+                            multiRowsDisplay: false,
+                            showIndent: false,
+                            showLeftAlignment: true,
+                            controller: _controller,
+                            toolbarIconSize: 17,
+                            iconTheme: QuillIconTheme(
+                              borderRadius: 4,
+                              iconSelectedFillColor: Colors.purple.shade900,
+                              iconUnselectedFillColor:
+                                  Color.fromRGBO(255, 255, 255, 1),
+                              iconUnselectedColor:
+                                  Color.fromARGB(255, 31, 26, 26),
+                              iconSelectedColor:
+                                  Color.fromRGBO(255, 255, 255, 1),
+                            ),
+                          ),
+                          QuillEditor.basic(
+                              controller: _controller, readOnly: false),
+                        ])
+                      ]),
                     ),
                   ),
                 ],
@@ -171,7 +154,8 @@ class frontbtn extends StatelessWidget {
 
 Route _frontbtnRoute() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const VersoScreenCard(),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const VersoScreenCard(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(0.0, 1.0);
       const end = Offset.zero;

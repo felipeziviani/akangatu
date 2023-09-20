@@ -1,20 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class EditDeckDialog extends StatefulWidget {
-  const EditDeckDialog({super.key});
+class EditDeckDialog extends StatelessWidget {
+  const EditDeckDialog({Key? key, required this.documentId}) : super(key: key);
+  final String documentId;
 
-  @override
-  State<EditDeckDialog> createState() => _EditDeckDialog();
-}
-
-final deckFormKey = GlobalKey<FormState>();
-final newName = TextEditingController();
-
-bool loading = false;
-
-class _EditDeckDialog extends State<EditDeckDialog> {
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
@@ -178,7 +169,15 @@ class _EditDeckDialog extends State<EditDeckDialog> {
                   ),
                 ),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    final collection =
+                        FirebaseFirestore.instance.collection('decks');
+                    collection
+                        .doc('docsId') // <-- Doc ID to be deleted.
+                        .delete() // <-- Delete
+                        .then((_) => print('Deleted'))
+                        .catchError((error) => print('Delete failed: $error'));
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all(Colors.transparent),
@@ -200,3 +199,9 @@ class _EditDeckDialog extends State<EditDeckDialog> {
     );
   }
 }
+
+final deckFormKey = GlobalKey<FormState>();
+final newName = TextEditingController();
+
+bool loading = false;
+late final FirebaseFirestore db;

@@ -22,7 +22,7 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
       setState(() => loading = true);
       await context
           .read<DeckService>()
-          .newDeck(newName.text, newDescription.text);
+          .newDeck(newName.text);
       setState(() => loading = false);
       // ignore: unused_catch_clause
     } on Exception catch (e) {

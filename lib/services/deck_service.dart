@@ -19,7 +19,7 @@ class DeckService extends ChangeNotifier {
     notifyListeners();
   }
 
-  newDeck(String name, String description) async {
+  newDeck(String name) async {
     try {
       await _collection.add({
         'name': name,
@@ -34,7 +34,8 @@ class DeckService extends ChangeNotifier {
     }
   }
 
-}
+} 
+
 class GetDeckName extends StatelessWidget {
   final String documentId;
 
@@ -66,3 +67,4 @@ class GetDeckName extends StatelessWidget {
     );
   }
 }
+
