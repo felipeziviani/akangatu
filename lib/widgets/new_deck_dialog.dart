@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/home_screen.dart';
+
 class NewDeckDialog extends StatefulWidget {
   const NewDeckDialog({super.key});
 
@@ -20,9 +22,7 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
   newDeck() async {
     try {
       setState(() => loading = true);
-      await context
-          .read<DeckService>()
-          .newDeck(newName.text);
+      await context.read<DeckService>().newDeck(newName.text);
       setState(() => loading = false);
       // ignore: unused_catch_clause
     } on Exception catch (e) {
@@ -170,7 +170,11 @@ class _NewDeckDialogState extends State<NewDeckDialog> {
                       ),
                       onPressed: () {
                         newDeck();
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        );
                       },
                       child: Text(
                         'CRIAR DECK',

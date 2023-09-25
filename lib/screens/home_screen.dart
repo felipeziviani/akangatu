@@ -1,4 +1,5 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
+import 'package:akangatu_project/screens/list_card.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/deck_service.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
@@ -54,72 +55,82 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: docIds.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Container(
-                      color: Colors.purple[900],
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10.0, right: 10.0, bottom: 10.0),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              trailing: IconButton(
-                                icon: Icon(Icons.settings),
-                                color: Colors.white,
-                                iconSize: 24,
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return EditDeckDialog(documentId: docIds[index]);
-                                    },
-                                  );
-                                },
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ListCard()),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Container(
+                        color: Colors.purple[900],
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10.0, bottom: 10.0),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                trailing: IconButton(
+                                  icon: Icon(Icons.settings),
+                                  color: Colors.white,
+                                  iconSize: 24,
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return EditDeckDialog(
+                                            documentId: docIds[index]);
+                                      },
+                                    );
+                                  },
+                                ),
+                                textColor: Colors.white,
+                                title: GetDeckName(documentId: docIds[index]),
                               ),
-                              textColor: Colors.white,
-                              title: GetDeckName(documentId: docIds[index]),
-                            ),
-                            Divider(
-                              color: Colors.transparent,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                Row(
-                                  children: [
-                                    Icon(Icons.access_time_filled_rounded,
-                                        color: Colors.white),
-                                    SizedBox(width: 3),
-                                    Text(
-                                      '00/00/0000',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
+                              Divider(
+                                color: Colors.transparent,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Row(
+                                    children: [
+                                      Icon(Icons.access_time_filled_rounded,
+                                          color: Colors.white),
+                                      SizedBox(width: 3),
+                                      Text(
+                                        '00/00/0000',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.layers, color: Colors.white),
-                                    SizedBox(width: 2),
-                                    Text(
-                                      'QUANTIDADE',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.layers, color: Colors.white),
+                                      SizedBox(width: 2),
+                                      Text(
+                                        'QUANTIDADE',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

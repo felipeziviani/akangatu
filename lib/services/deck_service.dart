@@ -1,22 +1,36 @@
+
+import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DeckException implements Exception {
   String message;
   DeckException(this.message);
 }
 
-  var userId = FirebaseAuth.instance.currentUser!.uid;
+var userId = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference _collection =
     FirebaseFirestore.instance.collection('decks_${userId}');
 
 class DeckService extends ChangeNotifier {
   bool isLoading = true;
 
-  _getDecks() {
+  _getDecks() async {
     _collection.get();
     notifyListeners();
+  }
+
+  DeleteDeck(String documentId, BuildContext context) async {
+    // ignore: unused_local_variable
+    final collection = FirebaseFirestore.instance
+        .collection('decks_${userId}')
+        .doc(documentId) // <-- Doc ID to be deleted.
+        .delete() // <-- Delete
+        .then((_) => print('Deleted'))
+        .catchError((error) => print('Delete failed: $error'));
+        // await context.read<HomePage>().getDocId();
   }
 
   newDeck(String name) async {
@@ -33,8 +47,7 @@ class DeckService extends ChangeNotifier {
       }
     }
   }
-
-} 
+}
 
 class GetDeckName extends StatelessWidget {
   final String documentId;
@@ -67,4 +80,3 @@ class GetDeckName extends StatelessWidget {
     );
   }
 }
-

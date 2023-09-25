@@ -6,4 +6,6 @@ class Decks {
   Widget body;
 
   Decks(this.isExpanded, this.nome, this.body);
+
+  static document(String id) {}
 }

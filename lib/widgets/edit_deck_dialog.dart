@@ -1,13 +1,43 @@
+// ignore_for_file: unused_local_variable
+
+import 'package:akangatu_project/services/deck_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-class EditDeckDialog extends StatelessWidget {
+import '../screens/home_screen.dart';
+
+class EditDeckDialog extends StatefulWidget {
   const EditDeckDialog({Key? key, required this.documentId}) : super(key: key);
   final String documentId;
 
   @override
+  State<EditDeckDialog> createState() => _EditDeckDialogState();
+}
+
+class _EditDeckDialogState extends State<EditDeckDialog> {
+  void DeleteDeck(
+    String documentId,
+  ) async {
+    try {
+      await context.read<DeckService>().DeleteDeck(documentId, context);
+
+      // ignore: unused_catch_clause
+    } on Exception catch (e) {
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   behavior: SnackBarBehavior.floating,
+      //   content: Text(e.toString(),
+      //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+      //   backgroundColor: Colors.deepPurple,
+      // ));
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var userId = FirebaseAuth.instance.currentUser!.uid;
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     return AlertDialog(
@@ -170,13 +200,14 @@ class EditDeckDialog extends StatelessWidget {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    final collection =
-                        FirebaseFirestore.instance.collection('decks');
-                    collection
-                        .doc('docsId') // <-- Doc ID to be deleted.
-                        .delete() // <-- Delete
-                        .then((_) => print('Deleted'))
-                        .catchError((error) => print('Delete failed: $error'));
+                    setState(() {
+                      DeleteDeck(widget.documentId);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
+                    });
                   },
                   style: ButtonStyle(
                     backgroundColor:

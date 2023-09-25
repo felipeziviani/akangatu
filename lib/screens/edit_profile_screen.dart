@@ -1,6 +1,7 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -11,7 +12,26 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePage extends State<EditProfilePage> {
+  
+   String nome = '';
+    String email = '';
+
+  pegarUsuario() async {
+    User? usuario = FirebaseAuth.instance.currentUser;
+    if (usuario != null) {
+      setState(() {
+        nome = usuario.displayName!;
+        email = usuario.email!;
+      });
+    }
+  }
+
   @override
+
+  void initState() {
+    pegarUsuario();
+    super.initState();
+  }
   Widget build(BuildContext context) {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
@@ -94,7 +114,8 @@ class _EditProfilePage extends State<EditProfilePage> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(40, 30, 40, 30),
+                              padding:
+                                  const EdgeInsets.fromLTRB(40, 30, 40, 30),
                               child: Container(
                                 height: 50,
                                 decoration: BoxDecoration(
@@ -129,33 +150,36 @@ class _EditProfilePage extends State<EditProfilePage> {
                                     horizontal: 30.0),
                                 child: Column(
                                   children: [
-                                    TextFormField(
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                      controller: editName,
-                                      decoration: const InputDecoration(
-                                        prefixIcon:
-                                            Icon(Icons.person_2_outlined),
-                                        prefixIconColor: Color(0xFF4A148C),
-                                        hintText: 'Usuário',
-                                        hintStyle: TextStyle(
-                                            color: Color.fromRGBO(0, 0, 0, 0.5),
-                                            fontWeight: FontWeight.bold),
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0xFF4A148C),
-                                            width: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'O nome deve ser preenchido.';
-                                        }
-                                        return null;
-                                      },
-                                    ),
+                                    Text(nome),
+                                    Text(email),
+                                    // TextFormField(
+                                    //   style: TextStyle(
+                                    //     color: Colors.black,
+                                    //   ),
+                                    //   controller: editName,
+                                    //   decoration: const InputDecoration(
+                                    //     prefixIcon:
+                                    //         Icon(Icons.person_2_outlined),
+                                    //     prefixIconColor: Color(0xFF4A148C),
+                                    //     hintText: (nome),
+                                    //     hintStyle: TextStyle(
+                                    //         color: Color.fromRGBO(0, 0, 0, 0.5),
+                                    //         fontWeight: FontWeight.bold),
+                                    //     enabledBorder: UnderlineInputBorder(
+                                    //       borderSide: BorderSide(
+                                    //         color: Color(0xFF4A148C),
+                                    //         width: 2,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    //   validator: (value) {
+                                    //     if (value!.isEmpty) {
+                                    //       return 'O nome deve ser preenchido.';
+                                    //     }
+                                    //     return null;
+                                    //   },
+                                    // ),
+                                    
                                     Divider(
                                       color: Colors.transparent,
                                     ),
