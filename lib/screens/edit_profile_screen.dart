@@ -37,7 +37,6 @@ class _EditProfilePage extends State<EditProfilePage> {
     double fem = MediaQuery.of(context).size.width / baseWidth;
 
     final editFormKey = GlobalKey<FormState>();
-    final editName = TextEditingController();
     final editEmail = TextEditingController();
     final editSenhaAtual = TextEditingController();
     final editSenhaNova = TextEditingController();

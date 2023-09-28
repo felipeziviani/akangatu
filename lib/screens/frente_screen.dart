@@ -53,7 +53,7 @@ class _CardPageState extends State<CardPage> {
                       color: Colors.purple.shade900,
                     ),
                     SizedBox(width: 3),
-                    Text('DECK ATUAL:',
+                    Text('DECK ATUAL: ',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18)),
                   ],
@@ -66,24 +66,39 @@ class _CardPageState extends State<CardPage> {
                 endIndent: 35,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 35.0, 
-                //bottom: 20.0
+                padding: const EdgeInsets.only(
+                  top: 35.0,
+                  //bottom: 20.0
                 ),
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('ㅤFRENTE CARDㅤ',
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 330,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(235, 235, 235, 235),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Text(
+                          'FRENTE CARD',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                             color: Color.fromARGB(255, 115, 32, 215),
-                            backgroundColor:Color.fromARGB(235, 235, 235, 235)),
-                            
-                            
-                          )],
-                          
-                    ),
+                            // backgroundColor:Color.fromARGB(235, 235, 235, 235)
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +111,12 @@ class _CardPageState extends State<CardPage> {
                             color: Color.fromARGB(235, 235, 235, 235),
                             width: 10.0,
                             style: BorderStyle.solid),
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                          topRight: Radius.zero,
+                          topLeft: Radius.zero,
+                        ),
                         color: Color.fromARGB(234, 255, 255, 255)),
                     child: SafeArea(
                       child: ListView(children: <Widget>[
