@@ -37,13 +37,13 @@ class _ListCard extends State<ListCard> {
       body: FutureBuilder(
         builder: (context, Index) {
           return ListView.builder(
-            itemCount: 3,
+            itemCount: 1,
             itemBuilder: (context, index) {
               return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ViewCard()),
+                      MaterialPageRoute(builder: (context) => ViewCard()),
                     );
                   },
                 child: Padding(
@@ -65,7 +65,7 @@ class _ListCard extends State<ListCard> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text('DECK_NAME',
+                                      Text('FERNANDIN',
                                           style: TextStyle(
                                             fontSize: 20,
                                             color: Colors.white,
@@ -74,7 +74,9 @@ class _ListCard extends State<ListCard> {
                                       Padding(
                                         padding: EdgeInsets.only(left: 150 * fem),
                                         child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            print('era para deletar a merda do card, mas ele nem existe.');
+                                          },
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
@@ -120,7 +122,7 @@ class _ListCard extends State<ListCard> {
                                             color: Colors.white,
                                           ),
                                           text:
-                                              'CARD_FRENTE, Exp: Às vezes ouço passar o vento; e só de ouvir o vento passar, vale a pena ter nascido.'),
+                                              'Amo como ama o amor.  Não conheço nenhuma outra razão para amar senão amar.  Que queres que te diga, além de que te amo, se o que quero dizer-te é que te amo?'),
                                     ),
                                   ),
                                 ],
