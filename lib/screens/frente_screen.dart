@@ -146,7 +146,9 @@ class _CardPageState extends State<CardPage> {
                   ),
                 ],
               ),
-              frontbtn(),
+              Container (        
+                child: VersoScreenCard()
+              )
             ],
           ),
         ),
@@ -155,38 +157,38 @@ class _CardPageState extends State<CardPage> {
   }
 }
 
-class frontbtn extends StatelessWidget {
-  const frontbtn({super.key});
+// class frontbtn extends StatelessWidget {
+//   const frontbtn({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 50),
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).push(_frontbtnRoute());
-        },
-        child: const Text('VERSO CARD'),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: EdgeInsets.only(top: 50),
+//       child: ElevatedButton(
+//         onPressed: () {
+//           Navigator.of(context).push(_frontbtnRoute());
+//         },
+//         child: const Text('VERSO CARD'),
+//       ),
+//     );
+//   }
+// }
 
-Route _frontbtnRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const VersoScreenCard(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
+// Route _frontbtnRoute() {
+//   return PageRouteBuilder(
+//     pageBuilder: (context, animation, secondaryAnimation) =>
+//         const VersoScreenCard(),
+//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//       const begin = Offset(0.0, 1.0);
+//       const end = Offset.zero;
+//       const curve = Curves.ease;
 
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+//       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}
+//       return SlideTransition(
+//         position: animation.drive(tween),
+//         child: child,
+//       );
+//     },
+//   );
+// }
