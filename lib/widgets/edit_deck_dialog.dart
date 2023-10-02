@@ -1,37 +1,69 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:akangatu_project/services/deck_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
 import '../screens/home_screen.dart';
 
 class EditDeckDialog extends StatefulWidget {
-  const EditDeckDialog({Key? key, required this.documentId}) : super(key: key);
+  const EditDeckDialog({Key? key, required this.documentId, required this.data}) : super(key: key);
   final String documentId;
+  final String data;
 
   @override
   State<EditDeckDialog> createState() => _EditDeckDialogState();
 }
 
 class _EditDeckDialogState extends State<EditDeckDialog> {
-  void DeleteDeck(
-    String documentId,
-  ) async {
-    try {
-      await context.read<DeckService>().DeleteDeck(documentId, context);
+  final deckFormKey = GlobalKey<FormState>();
+  late TextEditingController newName = TextEditingController();
 
+  bool loading = false;
+  late final FirebaseFirestore db;
+
+  late final Map dataToUpdate = {
+    'name': newName.text,
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    newName = TextEditingController(
+      text: widget.data,
+    );
+  }
+
+  editDeck(String documentId, String dataToUpdate) async {
+    try {
+      await context
+          .read<DeckService>()
+          .editDeck(documentId, dataToUpdate, context);
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(e.toString(),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          backgroundColor: Colors.deepPurple,
+        ),
+      );
+    }
+  }
+
+  deleteDeck(String documentId) async {
+    try {
+      await context.read<DeckService>().deleteDeck(documentId, context);
       // ignore: unused_catch_clause
     } on Exception catch (e) {
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //   behavior: SnackBarBehavior.floating,
-      //   content: Text(e.toString(),
-      //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-      //   backgroundColor: Colors.deepPurple,
-      // ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(e.toString(),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          backgroundColor: Colors.deepPurple,
+        ),
+      );
     }
   }
 
@@ -149,12 +181,13 @@ class _EditDeckDialogState extends State<EditDeckDialog> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 3,
-                                  )),
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 3,
+                                ),
+                              ),
                             ],
                           ),
                         )
@@ -171,7 +204,13 @@ class _EditDeckDialogState extends State<EditDeckDialog> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pop(context);
+                            editDeck(widget.documentId, newName.text);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
+                            );
                           },
                           child: Text(
                             'EDITAR DECK',
@@ -201,7 +240,7 @@ class _EditDeckDialogState extends State<EditDeckDialog> {
                 child: IconButton(
                   onPressed: () {
                     setState(() {
-                      DeleteDeck(widget.documentId);
+                      deleteDeck(widget.documentId);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -230,9 +269,3 @@ class _EditDeckDialogState extends State<EditDeckDialog> {
     );
   }
 }
-
-final deckFormKey = GlobalKey<FormState>();
-final newName = TextEditingController();
-
-bool loading = false;
-late final FirebaseFirestore db;

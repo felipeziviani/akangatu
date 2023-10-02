@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'package:akangatu_project/services/deck_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 class AuthException implements Exception {
   String message;
@@ -81,5 +83,25 @@ class AuthService extends ChangeNotifier {
   logout() async {
     await _auth.signOut();
     _getUser();
+  }
+
+  editUserName(newNome, context) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .update({'nome': newNome});
+  }
+
+  editUserEmail(newEmail, context) async {}
+
+  editUserSenha(newSenha, context) async {}
+
+  deleteUser(BuildContext context) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .delete()
+        .catchError((error) => print('Delete failed $error'));
+    _authCheck();
   }
 }

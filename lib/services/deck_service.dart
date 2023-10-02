@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,17 +19,6 @@ class DeckService extends ChangeNotifier {
     notifyListeners();
   }
 
-  DeleteDeck(String documentId, BuildContext context) async {
-    // ignore: unused_local_variable
-    final collection = FirebaseFirestore.instance
-        .collection('decks_${userId}')
-        .doc(documentId) // <-- Doc ID to be deleted.
-        .delete() // <-- Delete
-        .then((_) => print('Deleted'))
-        .catchError((error) => print('Delete failed: $error'));
-        // await context.read<HomePage>().getDocId();
-  }
-
   newDeck(String name) async {
     try {
       await _collection.add({
@@ -44,6 +32,20 @@ class DeckService extends ChangeNotifier {
         Exception('A!');
       }
     }
+  }
+
+  editDeck(String documentId, newData, BuildContext context) async {
+    DocumentReference document = _collection.doc(documentId);
+    document.update({
+      'name': newData,
+    });
+  }
+
+  deleteDeck(String documentId, BuildContext context) async {
+    _collection
+        .doc(documentId)
+        .delete()
+        .catchError((error) => print('Delete failed $error'));
   }
 }
 

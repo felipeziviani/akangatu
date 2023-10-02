@@ -83,7 +83,9 @@ class _HomePageState extends State<HomePage> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return EditDeckDialog(
-                                            documentId: docIds[index]);
+                                          documentId: docIds[index],
+                                          data: 'REVER',
+                                        );
                                       },
                                     );
                                   },
