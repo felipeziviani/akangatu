@@ -1,7 +1,6 @@
 import 'package:akangatu_project/screens/frente_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
-
 import 'home_screen.dart';
 
 class VersoScreenCard extends StatefulWidget {

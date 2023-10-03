@@ -65,9 +65,7 @@ class EditTileBox extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                  onPressed: () {
-                    tocFunction;
-                  },
+                  onPressed: tocFunction,
                   icon: Icon(
                     Icons.settings,
                     size: 22,

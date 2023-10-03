@@ -1,22 +1,53 @@
-import 'package:akangatu_project/screens/edit_profile_screen.dart';
+import 'package:akangatu_project/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../screens/edit_profile_screen.dart';
 
 class EditUserDialog extends StatefulWidget {
-  const EditUserDialog({super.key, required this.field, required this.data});
+  const EditUserDialog(
+      {super.key, required this.field, required this.icon, required this.data});
   final String field;
   final String data;
+  final IconData icon;
 
   @override
   State<EditUserDialog> createState() => _EditUserDialogState();
 }
 
 class _EditUserDialogState extends State<EditUserDialog> {
-
   final editFormKey = GlobalKey<FormState>();
   final newData = TextEditingController();
 
-  editUserData() async {
-
+  editUserData(String field, String dataToUpdate) async {
+    if (field == 'Nome') {
+      try {
+        await context.read<AuthService>().editarNome(dataToUpdate, context);
+      } on Exception catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(e.toString(),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+            backgroundColor: Colors.deepPurple,
+          ),
+        );
+      }
+    }
+    else if (field == 'E-mail') {
+      try {
+        await context.read<AuthService>().editEmail(dataToUpdate, context);
+      } on Exception catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(e.toString(),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+            backgroundColor: Colors.deepPurple,
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -47,7 +78,7 @@ class _EditUserDialogState extends State<EditUserDialog> {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            "EDITAR DECK",
+            "EDITAR ${widget.field}".toUpperCase(),
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -67,13 +98,13 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 style: TextStyle(
                   color: Colors.black,
                 ),
-                decoration: const InputDecoration(
+                decoration: new InputDecoration(
                   prefixIcon: Icon(
-                    Icons.layers_rounded,
+                    widget.icon,
                     color: Color(0xFF4A148C),
                     size: 24,
                   ),
-                  hintText: 'Nome Deck',
+                  hintText: '${widget.data}',
                   hintStyle: TextStyle(
                       color: Color.fromRGBO(0, 0, 0, 0.5),
                       fontWeight: FontWeight.bold),
@@ -86,13 +117,13 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 ),
                 // ignore: body_might_complete_normally_nullable
                 validator: (value) {
-                  if (widget.field == 'nome' && value!.isEmpty) {
+                  if (widget.field == 'Nome' && value!.isEmpty) {
                     return 'Informe o nome do usuário!';
                   }
-                  if (widget.field == 'email' && value!.isEmpty) {
+                  if (widget.field == 'E-mail' && value!.isEmpty) {
                     return 'Informe o email';
                   }
-                  if (widget.field == 'senha' && value!.isEmpty) {
+                  if (widget.field == 'Senha' && value!.isEmpty) {
                     return 'Informe a senha!';
                   }
                 },
@@ -106,8 +137,8 @@ class _EditUserDialogState extends State<EditUserDialog> {
       ),
       actions: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               margin:
@@ -126,35 +157,33 @@ class _EditUserDialogState extends State<EditUserDialog> {
               width: 125 * fem,
               height: 40 * fem,
               child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                    shape: MaterialStateProperty.all<
-                        RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: Colors.transparent),
-                      ),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.transparent),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      side: BorderSide(color: Colors.transparent),
                     ),
                   ),
-                  onPressed: () {
-                    print('pressionado');
-                    //editUserData(widget.field, newData.text);
-                    //Navigator.pushReplacement(
-                    //  context,
-                    //  MaterialPageRoute(
-                    //    builder: (context) => const EditProfilePage(),
-                    //  ),
-                    // );
-                  },
-                  child: Text(
-                    'EDITAR DECK',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold),
-                  ),
                 ),
+                onPressed: () {
+                  editUserData(widget.field, newData.text);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditProfilePage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'EDITAR DECK',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ],
         ),

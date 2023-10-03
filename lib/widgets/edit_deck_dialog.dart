@@ -1,6 +1,5 @@
 import 'package:akangatu_project/services/deck_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +68,6 @@ class _EditDeckDialogState extends State<EditDeckDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var userId = FirebaseAuth.instance.currentUser!.uid;
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     return AlertDialog(

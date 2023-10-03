@@ -2,7 +2,6 @@ import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/auth_service.dart';
-import 'package:akangatu_project/services/deck_service.dart';
 import 'package:akangatu_project/widgets/edit_tile_box.dart';
 import 'package:akangatu_project/widgets/edit_user_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,24 +34,25 @@ class _EditProfilePage extends State<EditProfilePage> {
     }
   }
 
+  editField(String field, IconData icon, String data) async {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return EditUserDialog(
+            field: field,
+            icon: icon,
+            data: data,
+          );
+        },
+      );
+    }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
 
     final currentUser = FirebaseAuth.instance.currentUser!;
-
-    editField(String field, String data) async {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return EditUserDialog(
-            field: field,
-            data: data,
-          );
-        },
-      );
-    }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -166,7 +166,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                                     sectionName: 'Usuário',
                                     text: currentUser.displayName!,
                                     tocFunction: () => editField(
-                                        'nome', currentUser.displayName!),
+                                        'Nome', Icons.person_2_outlined, currentUser.displayName!),
                                   ),
                                   Divider(
                                     height: 10,
@@ -177,7 +177,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                                     sectionName: 'E-mail',
                                     text: currentUser.email!,
                                     tocFunction: () =>
-                                        editField('email', currentUser.email!),
+                                        editField('E-mail', Icons.email_outlined, currentUser.email!),
                                   ),
                                   Divider(
                                     height: 10,
@@ -187,7 +187,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                                     icon: Icons.lock_outline_rounded,
                                     sectionName: 'Senha',
                                     text: '••••••••••••••••••••••••••••••',
-                                    tocFunction: () => editField('senha', 'senha'),
+                                    tocFunction: () => editField('Senha', Icons.lock_outline_rounded, '••••••••••••••••'),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(

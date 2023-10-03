@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'package:akangatu_project/services/deck_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 class AuthException implements Exception {
   String message;
@@ -15,7 +13,6 @@ class AuthService extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
   User? usuario;
   bool isLoading = true;
-  var uid;
 
   AuthService() {
     _authCheck();
@@ -47,11 +44,17 @@ class AuthService extends ChangeNotifier {
           .then((value) {
             CollectionReference users =
                 FirebaseFirestore.instance.collection('users');
-            users.add({
+            users.doc(usuario!.uid).set({
               'nome': nome,
               'email': email,
               'senha': senhaMd5,
             });
+            //users.add({
+            //  'uid': usuario!.uid,
+            //  'nome': nome,
+            //  'email': email,
+            //  'senha': senhaMd5,
+            //});
           });
       _getUser();
     } on FirebaseAuthException catch (e) {
@@ -85,23 +88,60 @@ class AuthService extends ChangeNotifier {
     _getUser();
   }
 
-  editUserName(newNome, context) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .update({'nome': newNome});
+  editarNome(newName, context) async {
+    try {
+      await FirebaseAuth.instance.currentUser!.updateDisplayName(newName).then(
+          (value) => FirebaseFirestore.instance
+              .collection('users')
+              .doc(usuario!.uid)
+              .update({'nome': newName}));
+      _getUser();
+    } on FirebaseAuthException catch (e) {
+      print('BUGOU ESSA MERDA: $e');
+    }
   }
 
-  editUserEmail(newEmail, context) async {}
+  editEmail(newEmail, context) async {
+    try {
+      await FirebaseAuth.instance.currentUser!.updateEmail(newEmail).then(
+          (value) => FirebaseFirestore.instance
+              .collection('users')
+              .doc(usuario!.uid)
+              .update({'email': newEmail}));
+      _getUser();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        throw AuthException('O e-mail é invalido!');
+      } else if (e.code == 'email-already-in-use') {
+        throw AuthException('Este e-mail já está sendo usado!');
+      }
+    }
+  }
 
-  editUserSenha(newSenha, context) async {}
+  editSenha(newSenha, context) async {
+    String newSenhaMd5 = md5.convert(utf8.encode(newSenha)).toString();
+    try {
+      await FirebaseAuth.instance.currentUser!.updatePassword(newSenhaMd5).then(
+          (value) => FirebaseFirestore.instance
+              .collection('users')
+              .doc(usuario!.uid)
+              .update({'senha': newSenhaMd5}));
+      _getUser();
+    } on FirebaseAuthException catch (e) {
+      print('BUGOU ESSA MERDA: $e');
+    }
+  }
 
   deleteUser(BuildContext context) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .delete()
-        .catchError((error) => print('Delete failed $error'));
-    _authCheck();
+    try {
+      logout();
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(usuario!.uid)
+          .delete()
+          .then((value) => FirebaseAuth.instance.currentUser!.delete());
+    } on FirebaseAuthException catch (e) {
+      print('BUGOU ESSA MERDA: $e');
+    }
   }
 }
