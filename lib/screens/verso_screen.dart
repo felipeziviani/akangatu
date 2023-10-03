@@ -1,7 +1,6 @@
 import 'package:akangatu_project/screens/frente_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
-import 'home_screen.dart';
 
 class VersoScreenCard extends StatefulWidget {
   const VersoScreenCard({super.key});
@@ -32,48 +31,36 @@ class _VersoScreenCard extends State<VersoScreenCard> {
     // ignore: unused_local_variable
     double fem = MediaQuery.of(context).size.width / baseWidht;
     return Flexible(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 35.0,
-                //bottom: 20.0
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 330,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(235, 235, 235, 235),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Text(
-                        'VERSO CARD',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Color.fromARGB(255, 115, 32, 215),
-                          // backgroundColor:Color.fromARGB(235, 235, 235, 235)
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 42.0),
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
               children: [
+                Container(
+                  width: 330,
+                  height: 25,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(235, 235, 235, 235),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Text(
+                      'VERSO CARD',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 115, 32, 215),
+                        // backgroundColor:Color.fromARGB(235, 235, 235, 235)
+                      ),
+                    ),
+                  ),
+                ),
                 Container(
                   width: 330,
                   height: 200,
@@ -105,8 +92,7 @@ class _VersoScreenCard extends State<VersoScreenCard> {
                                 Color.fromRGBO(255, 255, 255, 1),
                             iconUnselectedColor:
                                 Color.fromARGB(255, 31, 26, 26),
-                            iconSelectedColor:
-                                Color.fromRGBO(255, 255, 255, 1),
+                            iconSelectedColor: Color.fromRGBO(255, 255, 255, 1),
                           ),
                         ),
                         QuillEditor.basic(
@@ -117,9 +103,8 @@ class _VersoScreenCard extends State<VersoScreenCard> {
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
       ),
     );
   }
