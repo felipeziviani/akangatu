@@ -169,12 +169,12 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 ),
                 onPressed: () {
                   editUserData(widget.field, newData.text);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const EditProfilePage(),
-                    ),
-                  );
+                 Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const EditProfilePage()),
+                      );
+                
                 },
                 child: Text(
                   'EDITAR DECK',

@@ -8,11 +8,11 @@ class CardException implements Exception {
   CardException(this.message);
 }
 
-  var cardId = FirebaseAuth.instance.currentUser!.uid;
+  var userId = FirebaseAuth.instance.currentUser!.uid;
 CollectionReference _collection =
-    FirebaseFirestore.instance.collection('cards_${cardId}');
+    FirebaseFirestore.instance.collection('cards_${userId}');
 
-class DeckService extends ChangeNotifier {
+class CardService extends ChangeNotifier {
   bool isLoading = true;
 
   _getCards() {
@@ -28,11 +28,7 @@ class DeckService extends ChangeNotifier {
       });
       _getCards();
     } on FirebaseException catch (e) {
-      if (e.code == '') {
-        Exception('');
-      } else if (e.code == 'a') {
-        Exception('A!');
-      }
+      print(e);
     }
   }
 

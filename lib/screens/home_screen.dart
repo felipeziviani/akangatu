@@ -21,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   List<String> docIds = [];
 
   var userId = FirebaseAuth.instance.currentUser!.uid;
-
   Future getDocId() async {
     docIds.clear();
     await FirebaseFirestore.instance.collection('decks_$userId').get().then(
@@ -34,9 +33,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   late ListView List_Deck;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return Scaffold(
       appBar: AkangaAppBar(),
       drawer: ClipRRect(
@@ -83,9 +81,9 @@ class _HomePageState extends State<HomePage> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return EditDeckDialog(
-                                          documentId: docIds[index],
-                                          data: 'REVER',
-                                        );
+                                            documentId: docIds[index],
+                                            data: 'Aí'
+                                            );
                                       },
                                     );
                                   },

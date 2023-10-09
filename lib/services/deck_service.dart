@@ -51,9 +51,7 @@ class DeckService extends ChangeNotifier {
 
 class GetDeckName extends StatelessWidget {
   final String documentId;
-
   GetDeckName({required this.documentId});
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -80,3 +78,4 @@ class GetDeckName extends StatelessWidget {
     );
   }
 }
+
