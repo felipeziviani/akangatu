@@ -152,7 +152,7 @@ class _EditUserDialogState extends State<EditUserDialog> {
                   ],
                 ),
               ),
-              width: 125 * fem,
+              width: 135 * fem,
               height: 40 * fem,
               child: ElevatedButton(
                 style: ButtonStyle(
@@ -173,7 +173,7 @@ class _EditUserDialogState extends State<EditUserDialog> {
                   );
                 },
                 child: Text(
-                  'EDITAR DECK',
+                  'EDITAR ${widget.field}'.toUpperCase(),
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+
 class DeckException implements Exception {
   String message;
   DeckException(this.message);
@@ -49,17 +50,23 @@ class DeckService extends ChangeNotifier {
   }
 }
 
+
+
 class GetDeckName extends StatelessWidget {
   final String documentId;
+  // late final String name;
   GetDeckName({required this.documentId});
   @override
   Widget build(BuildContext context) {
+
+    
     return FutureBuilder(
       future: _collection.doc(documentId).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
+          // name = data['name'];
           return Text('${data['name']}',
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -78,4 +85,3 @@ class GetDeckName extends StatelessWidget {
     );
   }
 }
-

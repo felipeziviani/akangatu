@@ -24,11 +24,13 @@ class _HomePageState extends State<HomePage> {
   Future getDocId() async {
     docIds.clear();
     await FirebaseFirestore.instance.collection('decks_$userId').get().then(
-          (snapshot) => snapshot.docs.forEach(
-            (document) {
-              docIds.add(document.reference.id);
-            },
-          ),
+          (snapshot) { 
+            snapshot.docs.forEach(
+              (document) {
+                docIds.add(document.reference.id);
+              },
+            );
+          }
         );
   }
 
@@ -82,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                                       builder: (BuildContext context) {
                                         return EditDeckDialog(
                                             documentId: docIds[index],
-                                            data: 'Aí'
+                                            data: GetDeckName(documentId: docIds[index]).toString(),
                                             );
                                       },
                                     );

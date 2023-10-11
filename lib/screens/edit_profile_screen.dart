@@ -94,7 +94,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                         children: <Widget>[
                           Container(
                             width: 360 * fem,
-                            height: 370 * fem,
+                            height: 300 * fem,
                             child: Container(
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
