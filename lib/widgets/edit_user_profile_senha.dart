@@ -1,50 +1,39 @@
-import 'package:akangatu_project/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../screens/edit_profile_screen.dart';
+import '../services/auth_service.dart';
 
-class EditUserDialog extends StatefulWidget {
-  const EditUserDialog(
-      {super.key, required this.field, required this.icon, required this.data});
+class EditUserPasswordDialog extends StatefulWidget {
+  const EditUserPasswordDialog(
+      {super.key, required this.field, required this.data, required this.icon});
   final String field;
   final String data;
   final IconData icon;
 
   @override
-  State<EditUserDialog> createState() => _EditUserDialogState();
+  State<EditUserPasswordDialog> createState() => _EditUserPasswordDialogState();
 }
 
-class _EditUserDialogState extends State<EditUserDialog> {  
-  final editFormKey = GlobalKey<FormState>();
-  final newData = TextEditingController();
+class _EditUserPasswordDialogState extends State<EditUserPasswordDialog> {
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
-  editUserData(String field, String dataToUpdate) async {
-    if (field == 'Nome') {
-      try {
-        await context.read<AuthService>().editarNome(dataToUpdate, context);
-      } on Exception catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            content: Text(e.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-            backgroundColor: Colors.deepPurple,
-          ),
-        );
-      }
-    } else if (field == 'E-mail') {
-      try {
-        await context.read<AuthService>().editEmail(dataToUpdate, context);
-      } on Exception catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            content: Text(e.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-            backgroundColor: Colors.deepPurple,
-          ),
-        );
-      }
+  final editFormKey = GlobalKey<FormState>();
+  final oldSenha = TextEditingController();
+  final newSenha = TextEditingController();
+
+  editUserData(oldSenha, dataToUpdate) async {
+    try {
+      await context
+          .read<AuthService>()
+          .editSenha(currentUser.email, oldSenha, dataToUpdate, context);
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text(e.toString(),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+        backgroundColor: Colors.deepPurple,
+      ));
     }
   }
 
@@ -92,10 +81,42 @@ class _EditUserDialogState extends State<EditUserDialog> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                controller: newData,
+                controller: oldSenha,
                 style: TextStyle(
                   color: Colors.black,
                 ),
+                obscureText: true,
+                decoration: new InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.lock_open_rounded,
+                    color: Color(0xFF4A148C),
+                    size: 24,
+                  ),
+                  hintText: '${widget.data}',
+                  hintStyle: TextStyle(
+                      color: Color.fromRGBO(0, 0, 0, 0.5),
+                      fontWeight: FontWeight.bold),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xFF4A148C),
+                      width: 2,
+                    ),
+                  ),
+                ),
+                // ignore: body_might_complete_normally_nullable
+                validator: (value) {
+                  if (widget.field == 'Senha' && value!.isEmpty) {
+                    return 'Informe a senha!';
+                  }
+                },
+              ),
+              Divider(color: Colors.transparent),
+              TextFormField(
+                controller: newSenha,
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+                obscureText: true,
                 decoration: new InputDecoration(
                   prefixIcon: Icon(
                     widget.icon,
@@ -115,20 +136,14 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 ),
                 // ignore: body_might_complete_normally_nullable
                 validator: (value) {
-                  if (widget.field == 'Nome' && value!.isEmpty) {
-                    return 'Informe o nome do usuário!';
-                  }
-                  if (widget.field == 'E-mail' && value!.isEmpty) {
-                    return 'Informe o email';
-                  }
                   if (widget.field == 'Senha' && value!.isEmpty) {
                     return 'Informe a senha!';
+                  } else if (widget.field == 'Senha' && value!.length < 6) {
+                    return 'A senha deve ter no mínimo seis caracteres.';
                   }
                 },
               ),
-              Divider(
-                color: Colors.transparent,
-              ),
+              Divider(color: Colors.transparent),
             ],
           ),
         ),
@@ -166,7 +181,7 @@ class _EditUserDialogState extends State<EditUserDialog> {
                   ),
                 ),
                 onPressed: () {
-                  editUserData(widget.field, newData.text);
+                  editUserData(oldSenha.text, newSenha.text);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => EditProfilePage()),

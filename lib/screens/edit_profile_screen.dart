@@ -4,6 +4,7 @@ import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/auth_service.dart';
 import 'package:akangatu_project/widgets/edit_tile_box.dart';
 import 'package:akangatu_project/widgets/edit_user_dialog.dart';
+import 'package:akangatu_project/widgets/edit_user_profile_senha.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,6 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePage extends State<EditProfilePage> {
-
   deleteUser() async {
     try {
       await context.read<AuthService>().deleteUser(context);
@@ -35,17 +35,23 @@ class _EditProfilePage extends State<EditProfilePage> {
   }
 
   editField(String field, IconData icon, String data) async {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return EditUserDialog(
-            field: field,
-            icon: icon,
-            data: data,
-          );
-        },
-      );
-    }
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return (field == 'Senha')
+            ? EditUserPasswordDialog(
+                field: field,
+                icon: icon,
+                data: data,
+              )
+            : EditUserDialog(
+                field: field,
+                icon: icon,
+                data: data,
+              );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +112,7 @@ class _EditProfilePage extends State<EditProfilePage> {
                             margin: new EdgeInsets.symmetric(
                                 horizontal: 35.0 * fem, vertical: 150.0 * fem),
                             width: 290 * fem,
-                            height: 550 * fem,
+                            height: 490 * fem,
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -166,7 +172,9 @@ class _EditProfilePage extends State<EditProfilePage> {
                                     sectionName: 'Usuário',
                                     text: currentUser.displayName!,
                                     tocFunction: () => editField(
-                                        'Nome', Icons.person_2_outlined, currentUser.displayName!),
+                                        'Nome',
+                                        Icons.person_2_outlined,
+                                        currentUser.displayName!),
                                   ),
                                   Divider(
                                     height: 10,
@@ -176,8 +184,10 @@ class _EditProfilePage extends State<EditProfilePage> {
                                     icon: Icons.email_outlined,
                                     sectionName: 'E-mail',
                                     text: currentUser.email!,
-                                    tocFunction: () =>
-                                        editField('E-mail', Icons.email_outlined, currentUser.email!),
+                                    tocFunction: () => editField(
+                                        'E-mail',
+                                        Icons.email_outlined,
+                                        currentUser.email!),
                                   ),
                                   Divider(
                                     height: 10,
@@ -187,7 +197,10 @@ class _EditProfilePage extends State<EditProfilePage> {
                                     icon: Icons.lock_outline_rounded,
                                     sectionName: 'Senha',
                                     text: '••••••••••••••••••••••••••••••',
-                                    tocFunction: () => editField('Senha', Icons.lock_outline_rounded, '••••••••••••••••'),
+                                    tocFunction: () => editField(
+                                        'Senha',
+                                        Icons.lock_outline_rounded,
+                                        '••••••••••••••••'),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(

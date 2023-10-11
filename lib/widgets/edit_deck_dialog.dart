@@ -25,13 +25,13 @@ class _EditDeckDialogState extends State<EditDeckDialog> {
     'name': newName.text,
   };
 
-  @override
-  void initState() {
-    super.initState();
-    newName = TextEditingController(
-      text: widget.data,
-    );
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   newName = TextEditingController(
+  //     text: widget.data,
+  //   );
+  // }
 
   editDeck(String documentId, String dataToUpdate) async {
     try {
