@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/login_register_screen.dart';
 
 class AuthException implements Exception {
   String message;
@@ -97,7 +100,7 @@ class AuthService extends ChangeNotifier {
               .update({'nome': newName}));
       _getUser();
     } on FirebaseAuthException catch (e) {
-      print('BUGOU ESSA MERDA: $e');
+      print('$e');
     }
   }
 
@@ -108,7 +111,6 @@ class AuthService extends ChangeNotifier {
               .collection('users')
               .doc(usuario!.uid)
               .update({'email': newEmail}));
-      _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
         throw AuthException('O e-mail é invalido!');
@@ -134,12 +136,9 @@ class AuthService extends ChangeNotifier {
 
   deleteUser(BuildContext context) async {
     try {
-      logout();
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(usuario!.uid)
-          .delete()
-          .then((value) => FirebaseAuth.instance.currentUser!.delete());
+      usuario?.delete();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: ((context) => LoginRegisterPage())));
     } on FirebaseAuthException catch (e) {
       print('BUGOU ESSA MERDA: $e');
     }
