@@ -105,6 +105,7 @@ class AuthService extends ChangeNotifier {
   }
 
   editEmail(newEmail, context) async {
+    print("####################### $newEmail");
     try {
       await FirebaseAuth.instance.currentUser!.updateEmail(newEmail).then(
           (value) => FirebaseFirestore.instance
@@ -120,15 +121,23 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  editSenha(newSenha, context) async {
+  editSenha(currentEmail, oldSenha, newSenha, context) async {
+    String oldSenhaMd5 = md5.convert(utf8.encode(oldSenha)).toString();
     String newSenhaMd5 = md5.convert(utf8.encode(newSenha)).toString();
+
+    var cred = EmailAuthProvider.credential(
+        email: currentEmail, password: oldSenhaMd5);
+
     try {
-      await FirebaseAuth.instance.currentUser!.updatePassword(newSenhaMd5).then(
-          (value) => FirebaseFirestore.instance
+      await usuario!
+          .reauthenticateWithCredential(cred)
+          .then((value) => {usuario!.updatePassword(newSenhaMd5)})
+          .catchError((error) {
+        print(error.toString());
+      }).then((value) => FirebaseFirestore.instance
               .collection('users')
               .doc(usuario!.uid)
               .update({'senha': newSenhaMd5}));
-      _getUser();
     } on FirebaseAuthException catch (e) {
       print('$e');
     }
@@ -136,9 +145,12 @@ class AuthService extends ChangeNotifier {
 
   deleteUser(BuildContext context) async {
     try {
-      usuario?.delete();
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: ((context) => LoginRegisterPage())));
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(usuario!.uid)
+          .delete()
+          .then((value) => FirebaseAuth.instance.currentUser!.delete());
+      logout();
     } on FirebaseAuthException catch (e) {
       print('$e');
     }
