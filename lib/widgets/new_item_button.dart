@@ -2,6 +2,8 @@ import 'package:akangatu_project/widgets/new_deck_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
+import '../screens/create_card_screen.dart';
+
 class NewItemButton extends StatefulWidget {
   const NewItemButton({super.key});
 
@@ -76,7 +78,8 @@ class _NewItemButtonState extends State<NewItemButton> {
         SpeedDialChild(
           labelWidget: GestureDetector(
             onTap: () {
-              print('ADICIONAR CARD');
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: ((context) => CardPage())));
             },
             child: Container(
               height: 35.0,

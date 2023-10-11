@@ -130,7 +130,7 @@ class AuthService extends ChangeNotifier {
               .update({'senha': newSenhaMd5}));
       _getUser();
     } on FirebaseAuthException catch (e) {
-      print('BUGOU ESSA MERDA: $e');
+      print('$e');
     }
   }
 
@@ -140,7 +140,7 @@ class AuthService extends ChangeNotifier {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: ((context) => LoginRegisterPage())));
     } on FirebaseAuthException catch (e) {
-      print('BUGOU ESSA MERDA: $e');
+      print('$e');
     }
   }
 }
