@@ -1,7 +1,7 @@
+import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../screens/edit_profile_screen.dart';
 import '../services/auth_service.dart';
 
 class EditUserPasswordDialog extends StatefulWidget {
@@ -92,7 +92,7 @@ class _EditUserPasswordDialogState extends State<EditUserPasswordDialog> {
                     color: Color(0xFF4A148C),
                     size: 24,
                   ),
-                  hintText: '${widget.data}',
+                  hintText: 'Senha Atual',
                   hintStyle: TextStyle(
                       color: Color.fromRGBO(0, 0, 0, 0.5),
                       fontWeight: FontWeight.bold),
@@ -123,7 +123,7 @@ class _EditUserPasswordDialogState extends State<EditUserPasswordDialog> {
                     color: Color(0xFF4A148C),
                     size: 24,
                   ),
-                  hintText: '${widget.data}',
+                  hintText: 'Nova Senha',
                   hintStyle: TextStyle(
                       color: Color.fromRGBO(0, 0, 0, 0.5),
                       fontWeight: FontWeight.bold),
@@ -182,9 +182,8 @@ class _EditUserPasswordDialogState extends State<EditUserPasswordDialog> {
                 ),
                 onPressed: () {
                   editUserData(oldSenha.text, newSenha.text);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => EditProfilePage()),
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MenuPage()),
                   );
                 },
                 child: Text(

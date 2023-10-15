@@ -4,7 +4,7 @@ import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/auth_service.dart';
 import 'package:akangatu_project/widgets/edit_tile_box.dart';
 import 'package:akangatu_project/widgets/edit_user_dialog.dart';
-import 'package:akangatu_project/widgets/edit_user_profile_senha.dart';
+import 'package:akangatu_project/widgets/edit_user_senha.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

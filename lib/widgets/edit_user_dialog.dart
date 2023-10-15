@@ -1,7 +1,7 @@
+import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../screens/edit_profile_screen.dart';
 
 class EditUserDialog extends StatefulWidget {
   const EditUserDialog(
@@ -167,9 +167,8 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 ),
                 onPressed: () {
                   editUserData(widget.field, newData.text);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => EditProfilePage()),
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MenuPage()),
                   );
                 },
                 child: Text(
