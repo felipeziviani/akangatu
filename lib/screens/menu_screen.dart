@@ -1,5 +1,4 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
-import 'package:akangatu_project/screens/frente_screen.dart';
 import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -114,8 +113,6 @@ class _MenuPage extends State<MenuPage> {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: ((context) => CardPage())));
                     },
                   ),
                   ListTile(
