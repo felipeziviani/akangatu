@@ -143,7 +143,10 @@ class AuthService extends ChangeNotifier {
 
   deleteUser(BuildContext context) async {
     try {
-      usuario!.delete();
+      usuario!.delete().then((value) => FirebaseFirestore.instance
+          .collection('users')
+          .doc(usuario!.uid)
+          .delete());
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: ((context) => LoginRegisterPage())));
     } on FirebaseAuthException catch (e) {
