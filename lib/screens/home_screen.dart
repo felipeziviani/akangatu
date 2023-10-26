@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   List<String> docIds = [];
 
   var userId = FirebaseAuth.instance.currentUser!.uid;
+  
   Future getDocId() async {
     docIds.clear();
     await FirebaseFirestore.instance.collection('decks_$userId').get().then(

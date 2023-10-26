@@ -1,5 +1,6 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/screens/home_screen.dart';
+import 'package:akangatu_project/screens/nav_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'edit_profile_screen.dart';
@@ -22,6 +23,7 @@ final MaterialStateProperty<Icon?> thumbIcon =
     return const Icon(Icons.wb_sunny_rounded, color: Colors.white);
   },
 );
+
 class _MenuPage extends State<MenuPage> {
   bool light = true;
 
@@ -97,11 +99,11 @@ class _MenuPage extends State<MenuPage> {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const EditProfilePage()),
-                        );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const EditProfilePage()),
+                      );
                     },
                   ),
                   ListTile(
@@ -113,6 +115,11 @@ class _MenuPage extends State<MenuPage> {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CardListPage()),
+                      );
                     },
                   ),
                   ListTile(
@@ -124,7 +131,7 @@ class _MenuPage extends State<MenuPage> {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
-                     Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: ((context) => StatisticScreen())));
                     },
                   ),

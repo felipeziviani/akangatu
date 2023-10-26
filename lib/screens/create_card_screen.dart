@@ -17,7 +17,10 @@ class CardPage extends StatefulWidget {
 class _CardPageState extends State<CardPage> {
   bool status = false;
   bool loading = false;
+
   late String deckId;
+  late String deckName;
+
   final userId = FirebaseAuth.instance.currentUser!.uid;
 
   final cardFormKey = GlobalKey<FormState>();
@@ -44,12 +47,13 @@ class _CardPageState extends State<CardPage> {
     });
   }
 
-  salvarCard(String frente, String verso, context, String idDeck) async {
+  salvarCard(String frente, String verso, context, String idDeck, String nameDeck) async {
     setState(() => loading = true);
     try {
       // ignore: unused_local_variable
       final cardData = {
         'deckId': idDeck,
+        'deckName': nameDeck,
         'frente': quillToJSON(controllerfrente),
         'verso': quillToJSON(controllerverso),
       };
@@ -71,9 +75,10 @@ class _CardPageState extends State<CardPage> {
     }
   }
 
-  void callbackDeck(String selectedValue) {
+  void callbackDeck(String selectedValue, String selectedName) {
     setState(() {
       deckId = selectedValue;
+      deckName = selectedName;
     });
   }
 
@@ -289,7 +294,8 @@ class _CardPageState extends State<CardPage> {
                           controllerfrente.document.toPlainText(),
                           controllerverso.document.toPlainText(),
                           context,
-                          deckId);
+                          deckId,
+                          deckName);
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (BuildContext context) {
                           return CardPage(); // Substitua 'SuaPaginaAtual' pelo nome da sua página atual

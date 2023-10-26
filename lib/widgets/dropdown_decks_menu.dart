@@ -13,7 +13,9 @@ class DecksDropdownMenu extends StatefulWidget {
 
 class _DecksDropdownMenuState extends State<DecksDropdownMenu> {
   var userId = FirebaseAuth.instance.currentUser!.uid;
+
   String? selectedValue;
+  String? selectedName;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class _DecksDropdownMenuState extends State<DecksDropdownMenu> {
           final selectDeck = snapshot.data?.docs.reversed.toList();
           if (selectDeck != null) {
             for (var deck in selectDeck) {
+              selectedName = deck['name'];
               allDecks.add(DropdownMenuItem(
                 value: deck.id,
                 child: Text(
@@ -78,7 +81,7 @@ class _DecksDropdownMenuState extends State<DecksDropdownMenu> {
             onChanged: (value) {
               setState(() {
                 selectedValue = value;
-                widget.callback(selectedValue);
+                widget.callback(selectedValue, selectedName);
               });
             },
           ),
