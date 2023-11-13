@@ -129,9 +129,10 @@ class AuthService extends ChangeNotifier {
       await usuario!
           .reauthenticateWithCredential(cred)
           .then((value) => {usuario!.updatePassword(newSenhaMd5)})
+          // ignore: body_might_complete_normally_catch_error
           .catchError((error) {
-        print(error.toString());
-      }).then((value) => FirebaseFirestore.instance
+            print(error.toString());
+          }).then((value) => FirebaseFirestore.instance
               .collection('users')
               .doc(usuario!.uid)
               .update({'senha': newSenhaMd5}));

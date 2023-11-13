@@ -106,14 +106,7 @@ class _HomePageState extends State<HomePage> {
                                       Icon(Icons.access_time_filled_rounded,
                                           color: Colors.white),
                                       SizedBox(width: 3),
-                                      Text(
-                                        '00/00/0000',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                      GetDeckDate(documentId: docIds[index]),
                                     ],
                                   ),
                                   Row(

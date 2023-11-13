@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
-import 'package:flutter_flip_card/flipcard/flip_card.dart';
-import 'package:flutter_flip_card/modal/flip_side.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/akanga_app_bar.dart';
@@ -53,11 +51,7 @@ class _CardListPageState extends State<CardListPage> {
             final data = document.data() as Map<String, dynamic>;
             final frenteData = data['frente'] as List<dynamic>?;
             final deckName = data['deckName'];
-
-            final versoData = data['verso'] as List<dynamic>?;
-
             String frente = '';
-            String verso = '';
 
             if (frenteData != null) {
               frenteData.forEach((item) {
@@ -67,13 +61,6 @@ class _CardListPageState extends State<CardListPage> {
               });
             }
 
-            if (versoData != null) {
-              versoData.forEach((item) {
-                if (item is Map<String, dynamic> && item['insert'] is String) {
-                  verso += item['insert'] as String;
-                }
-              });
-            }
             return GestureDetector(
               onTap: () {
                 Navigator.push(

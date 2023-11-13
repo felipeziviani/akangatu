@@ -177,14 +177,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.1"
-  effective_dart:
-    dependency: transitive
-    description:
-      name: effective_dart
-      sha256: "6a69783c808344084b65667e87ff600823531e95810a8a15882cb542fe22de80"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.2"
   equatable:
     dependency: transitive
     description:
@@ -193,14 +185,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.5"
-  expandable:
-    dependency: transitive
-    description:
-      name: expandable
-      sha256: "9604d612d4d1146dafa96c6d8eec9c2ff0994658d6d09fed720ab788c7f5afc2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -419,14 +403,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_markdown:
-    dependency: "direct main"
-    description:
-      name: flutter_markdown
-      sha256: dc6d5258653f6857135b32896ccda7f7af0c54dcec832495ad6835154c6c77c0
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.6.15"
   flutter_math_fork:
     dependency: transitive
     description:
@@ -630,7 +606,7 @@ packages:
     source: hosted
     version: "0.2.1"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
@@ -653,22 +629,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.1"
-  markdown:
-    dependency: transitive
-    description:
-      name: markdown
-      sha256: acf35edccc0463a9d7384e437c015a3535772e09714cf60e07eeef3a15870dcd
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.1.1"
-  markdown_editable_textinput:
-    dependency: "direct main"
-    description:
-      name: markdown_editable_textinput
-      sha256: f52a40c6c9ad21c9fedc09e7f29ac2f173909e255b80f3f668f44be477a8dec6
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   matcher:
     dependency: transitive
     description:
@@ -994,14 +954,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
-  translator:
-    dependency: transitive
-    description:
-      name: translator
-      sha256: "225ee22fc482736c593be5c232c0c5884b16d7cc42945c51ac73d9a0441dddcc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.7"
   tuple:
     dependency: transitive
     description:
