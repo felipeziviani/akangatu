@@ -113,14 +113,15 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Icon(Icons.layers, color: Colors.white),
                                       SizedBox(width: 2),
-                                      Text(
-                                        'QUANTIDADE',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                      GetCountCards(deckId: docIds[index]),
+                                      // Text(
+                                      //   'QUANTIDADE',
+                                      //   style: TextStyle(
+                                      //     fontSize: 18,
+                                      //     color: Colors.white,
+                                      //     fontWeight: FontWeight.bold,
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                 ],

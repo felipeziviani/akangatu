@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import '../widgets/akanga_app_bar.dart';
 import 'menu_screen.dart';
 
@@ -12,6 +13,7 @@ class CardListPage extends StatefulWidget {
 
 class _CardListPageState extends State<CardListPage> {
   var userId = FirebaseAuth.instance.currentUser!.uid;
+  CollectionReference _collection = FirebaseFirestore.instance.collection('cards_${FirebaseAuth.instance.currentUser!.uid}');
 
   late Stream<QuerySnapshot> _cardsStream;
 
@@ -20,7 +22,27 @@ class _CardListPageState extends State<CardListPage> {
   @override
   void initState() {
     super.initState();
-    _cardsStream = FirebaseFirestore.instance.collection('cards_${userId}').snapshots();
+    _cardsStream =
+        FirebaseFirestore.instance.collection('cards_${userId}').snapshots();
+  }
+
+  deleteCard(String documentId) async {
+    try {
+       await _collection
+          .doc(documentId)
+          .delete().then((value) => print('foi'))
+          .catchError((error) => print('Delete failed $error'));
+      // ignore: unused_catch_clause
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(e.toString(),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          backgroundColor: Colors.deepPurple,
+        ),
+      );
+    }
   }
 
   @override
@@ -50,7 +72,6 @@ class _CardListPageState extends State<CardListPage> {
           final cards = snapshot.data!.docs.map((document) {
             final data = document.data() as Map<String, dynamic>;
             final frenteData = data['frente'] as List<dynamic>?;
-            final deckName = data['deckName'];
             String frente = '';
 
             if (frenteData != null) {
@@ -87,18 +108,12 @@ class _CardListPageState extends State<CardListPage> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text('$deckName',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        )),
+                                    GetName(documentId: data['deckId']),
                                     Padding(
                                       padding: EdgeInsets.only(left: 150 * fem),
                                       child: IconButton(
                                         onPressed: () {
-                                          print(
-                                              'era para deletar a merda do card, mas ele nem existe.');
+                                          deleteCard(document.id);
                                         },
                                         style: ButtonStyle(
                                           backgroundColor:
@@ -171,6 +186,45 @@ class _CardListPageState extends State<CardListPage> {
           );
         },
       ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class GetName extends StatelessWidget {
+  var userId = FirebaseAuth.instance.currentUser!.uid;
+  final String documentId;
+  // late final String name;
+  GetName({required this.documentId});
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: FirebaseFirestore.instance
+          .collection('decks_${userId}')
+          .doc(documentId)
+          .get(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+          // name = data['name'];
+          return Text(
+            data['name'],
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        }
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CircularProgressIndicator(),
+          ],
+        );
+      },
     );
   }
 }

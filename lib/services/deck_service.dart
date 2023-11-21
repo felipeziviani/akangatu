@@ -119,3 +119,35 @@ class GetDeckDate extends StatelessWidget {
     );
   }
 }
+
+class GetCountCards extends StatelessWidget {
+  final String deckId;
+  // late final String name;
+  GetCountCards({required this.deckId});
+
+  CollectionReference card =
+      FirebaseFirestore.instance.collection('cards_${userId}');
+
+  @override
+  Widget build(BuildContext context) {
+    late var countagem;
+    return FutureBuilder(
+      future: _collection.doc(deckId).get(),
+      builder: (context, snapshot) {
+        var cards =
+            card.where('deckId', isEqualTo: '$deckId').count().get().then(
+                  (value) => print(value.count),
+                  onError: (e) => print('ERRO///// $e'),
+                );
+        return Text('$cards /////////');
+        // return Column(
+        //   mainAxisAlignment: MainAxisAlignment.start,
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: [
+        //     CircularProgressIndicator(),
+        //   ],
+        // );
+      },
+    );
+  }
+}
