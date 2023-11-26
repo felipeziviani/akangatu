@@ -1,3 +1,4 @@
+// ignore_for_file: must_be_immutable
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class DeckService extends ChangeNotifier {
       await _collection.add({
         'name': name,
         'dtCriacao': dtCriacaoFormatted,
+        'qtdCard': 0,
       });
       _getDecks();
     } on FirebaseException catch (e) {
@@ -45,6 +47,17 @@ class DeckService extends ChangeNotifier {
     document.update({
       'name': newData,
     });
+  }
+
+  updateDeckCount(String documentId, BuildContext context) async {
+    DocumentReference document = _collection.doc(documentId);
+    late var newCount;
+    final count = document.get().asStream().map((event) => newCount = 'qtdCard');
+    newCount = newCount++;
+    document.update({
+      'qtdCard': newCount,
+    });
+    print(count);
   }
 
   deleteDeck(String documentId, BuildContext context) async {
@@ -87,6 +100,34 @@ class GetDeckName extends StatelessWidget {
   }
 }
 
+class GetCountCards extends StatelessWidget {
+  final String deckId;
+  GetCountCards({required this.deckId});
+
+  CollectionReference cardCollection =
+      FirebaseFirestore.instance.collection('cards_${userId}');
+
+  @override
+  Widget build(BuildContext context) {
+    var countCard;
+    cardCollection.where("deckId", isEqualTo: deckId).count().get().then(
+      (res) {
+        countCard = res.count;
+        print(countCard);
+      },
+      onError: (e) => print("//////////////ERRO: $e"),
+    );
+    return Text(
+      countCard.toString(),
+      style: TextStyle(
+        fontSize: 18,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+}
+
 class GetDeckDate extends StatelessWidget {
   final String documentId;
   // late final String name;
@@ -115,38 +156,6 @@ class GetDeckDate extends StatelessWidget {
             CircularProgressIndicator(),
           ],
         );
-      },
-    );
-  }
-}
-
-class GetCountCards extends StatelessWidget {
-  final String deckId;
-  // late final String name;
-  GetCountCards({required this.deckId});
-
-  CollectionReference card =
-      FirebaseFirestore.instance.collection('cards_${userId}');
-
-  @override
-  Widget build(BuildContext context) {
-    late var countagem;
-    return FutureBuilder(
-      future: _collection.doc(deckId).get(),
-      builder: (context, snapshot) {
-        var cards =
-            card.where('deckId', isEqualTo: '$deckId').count().get().then(
-                  (value) => print(value.count),
-                  onError: (e) => print('ERRO///// $e'),
-                );
-        return Text('$cards /////////');
-        // return Column(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: [
-        //     CircularProgressIndicator(),
-        //   ],
-        // );
       },
     );
   }

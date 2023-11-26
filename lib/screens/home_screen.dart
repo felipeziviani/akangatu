@@ -1,5 +1,4 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
-import 'package:akangatu_project/screens/list_card.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/deck_service.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
@@ -58,10 +57,10 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const ListCard()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => const ListCard()),
+                    // );
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -114,6 +113,7 @@ class _HomePageState extends State<HomePage> {
                                       Icon(Icons.layers, color: Colors.white),
                                       SizedBox(width: 2),
                                       GetCountCards(deckId: docIds[index]),
+                                      // GetCountCards(deckId: docIds[index]),
                                       // Text(
                                       //   'QUANTIDADE',
                                       //   style: TextStyle(

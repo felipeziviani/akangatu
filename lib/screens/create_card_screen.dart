@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 
 import '../controllers/theme_controller.dart';
+import '../services/deck_service.dart';
 
 class CardPage extends StatefulWidget {
   const CardPage({super.key});
@@ -58,6 +59,8 @@ class _CardPageState extends State<CardPage> {
       await FirebaseFirestore.instance
           .collection('cards_${userId}')
           .add(cardData);
+      await context.read<DeckService>()
+          .editDeckCount(deckId, context);
     } on Exception catch (e) {
       setState(() => loading = false);
       ScaffoldMessenger.of(context).showSnackBar(

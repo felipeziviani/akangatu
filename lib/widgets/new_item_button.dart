@@ -42,42 +42,6 @@ class _NewItemButtonState extends State<NewItemButton> {
         SpeedDialChild(
           labelWidget: GestureDetector(
             onTap: () {
-              print('DECK COMPARTILHADO');
-            },
-            child: Container(
-              height: 35.0,
-              decoration: BoxDecoration(
-                color: Colors.purple.shade900,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Row(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 22.0, right: 5.0),
-                    child: Text(
-                      'DECK COMPARTILHADO',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20.0),
-                    child: Icon(
-                      Icons.file_download_outlined,
-                      color: Colors.white,
-                      size: 23,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        SpeedDialChild(
-          labelWidget: GestureDetector(
-            onTap: () {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: ((context) => CardPage())));
             },

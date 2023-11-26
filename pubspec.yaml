@@ -94,6 +94,11 @@ flutter:
    - images/icon/NEON/NeonLogo.png
    - images/icon/NEON/NeonMinimalist.png
    - images/icon/WHITE/WhiteMinimalist.png
+   - images/icon/DEMAIS_ICONS/triste.png
+   - images/icon/DEMAIS_ICONS/feliz.png
+   - images/icon/DEMAIS_ICONS/relogio.png
+
+
    
 
 

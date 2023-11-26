@@ -1,8 +1,8 @@
+import 'package:akangatu_project/screens/view_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
 import '../widgets/akanga_app_bar.dart';
 import 'menu_screen.dart';
 
@@ -13,7 +13,8 @@ class CardListPage extends StatefulWidget {
 
 class _CardListPageState extends State<CardListPage> {
   var userId = FirebaseAuth.instance.currentUser!.uid;
-  CollectionReference _collection = FirebaseFirestore.instance.collection('cards_${FirebaseAuth.instance.currentUser!.uid}');
+  CollectionReference _collection = FirebaseFirestore.instance
+      .collection('cards_${FirebaseAuth.instance.currentUser!.uid}');
 
   late Stream<QuerySnapshot> _cardsStream;
 
@@ -28,9 +29,9 @@ class _CardListPageState extends State<CardListPage> {
 
   deleteCard(String documentId) async {
     try {
-       await _collection
+      await _collection
           .doc(documentId)
-          .delete().then((value) => print('foi'))
+          .delete()
           .catchError((error) => print('Delete failed $error'));
       // ignore: unused_catch_clause
     } on Exception catch (e) {
@@ -83,10 +84,40 @@ class _CardListPageState extends State<CardListPage> {
             }
 
             return GestureDetector(
-              onTap: () {
+              onTap: () async {
+                final deckName =  GetName(documentId: data['deckId']);
+                final frenteData = data['frente'] as List<dynamic>? ?? [];
+                final versoData = data['verso'] as List<dynamic>? ?? [];
+
+                String frente = '';
+                String verso = '';
+
+                if (frenteData.isNotEmpty) {
+                  frenteData.forEach((item) {
+                    if (item is Map<String, dynamic> &&
+                        item['insert'] is String) {
+                      frente += item['insert'] as String;
+                    }
+                  });
+                }
+
+                if (versoData.isNotEmpty) {
+                  versoData.forEach((item) {
+                    if (item is Map<String, dynamic> &&
+                        item['insert'] is String) {
+                      verso += item['insert'] as String;
+                    }
+                  });
+                }
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Card()),
+                  MaterialPageRoute(
+                    builder: (context) => ViewCard(
+                      deckName: deckName, 
+                      frente: frente,
+                      verso: verso,
+                    ),
+                  ),
                 );
               },
               child: Padding(
@@ -110,7 +141,7 @@ class _CardListPageState extends State<CardListPage> {
                                   children: [
                                     GetName(documentId: data['deckId']),
                                     Padding(
-                                      padding: EdgeInsets.only(left: 150 * fem),
+                                      padding: EdgeInsets.only(left: 250),
                                       child: IconButton(
                                         onPressed: () {
                                           deleteCard(document.id);
@@ -171,14 +202,6 @@ class _CardListPageState extends State<CardListPage> {
                   ),
                 ),
               ),
-              // FlipCard(
-              //   rotateSide: RotateSide.right,
-              //   onTapFlipping: true,
-              //   axis: FlipAxis.vertical,
-              //   controller: con,
-              //   frontWidget: buildCardWidget('Frente', frente),
-              //   backWidget: buildCardWidget('Verso', verso),
-              // ),
             );
           }).toList();
           return ListView(

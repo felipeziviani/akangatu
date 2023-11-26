@@ -4,15 +4,17 @@ import '../controllers/theme_controller.dart';
 import '../widgets/akanga_app_bar.dart';
 import 'menu_screen.dart';
 
-class ViewCard extends StatefulWidget {
-  const ViewCard({super.key});
-
-  @override
-  State<ViewCard> createState() => _ViewCard();
-}
-
-class _ViewCard extends State<ViewCard> {
+class ViewCard extends StatelessWidget {
+  final Widget deckName;
+  final String frente;
+  final String verso;
   final con = FlipCardController();
+
+  ViewCard({
+    required this.deckName,
+    required this.frente,
+    required this.verso,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class _ViewCard extends State<ViewCard> {
                       color: Colors.purple.shade900,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 25, top: 25,right: 25),
+                      padding: EdgeInsets.only(left: 25, top: 25, right: 25),
                       child: ListView(
                         physics: NeverScrollableScrollPhysics(),
                         children: [
@@ -51,15 +53,8 @@ class _ViewCard extends State<ViewCard> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  'FERNANDIN',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: deckName)
                             ],
                           ),
                           SizedBox(
@@ -71,10 +66,11 @@ class _ViewCard extends State<ViewCard> {
                             children: [
                               RichText(
                                 text: TextSpan(
-                                  text: 'Amo como ama o amor.  Não conheço nenhuma outra razão para amar senão amar.  Que queres que te diga, além de que te amo, se o que quero dizer-te é que te amo?',
-                                  style: TextStyle(color: Colors.white,
+                                  text: frente,
+                                  style: TextStyle(
+                                    color: Colors.white,
                                     fontSize: 20,
-                                    ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -84,31 +80,24 @@ class _ViewCard extends State<ViewCard> {
                     ),
                   )),
               backWidget: Container(
-                  width: 300,
-                  height: 250,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.purple.shade900,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 25, top: 25, right: 25),
-                      child: ListView(
+                width: 300,
+                height: 250,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.purple.shade900,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 25, top: 25, right: 25),
+                    child: ListView(
                         physics: NeverScrollableScrollPhysics(),
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  'FERNANDIN',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: deckName),
                             ],
                           ),
                           SizedBox(
@@ -120,56 +109,125 @@ class _ViewCard extends State<ViewCard> {
                             children: [
                               RichText(
                                 text: TextSpan(
-                                  text: 'A frase expressa que, quando se ama alguém sinceramente, não é necessário dizer mais nada além de "te amo" para transmitir todo o sentimento. É uma declaração direta e poderosa de amor.',
-                                  style: TextStyle(color: Colors.white,
-                                    fontSize: 20,
-                                    ),
+                                  text: verso,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                  )),
+                        ]),
+                  ),
+                ),
+              ),
             ),
             SizedBox(
               height: 30,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF6A1B9A),
-                      Color(0xFF310C60),
-                    ],
-                  ),
-                ),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              side: BorderSide(color: Colors.transparent)))),
-                  child: Text(
-                    'VIRAR CARD',
-                    style: TextStyle(
+              padding:
+                  const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+              child: Row(
+                children: [
+                  SizedBox.fromSize(
+                    size: Size(100, 100),
+                    child: ClipOval(
+                      child: Material(
                         color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                'images/icon/DEMAIS_ICONS/feliz.png',
+                                width: 50,
+                                height: 50,
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              Text(
+                                "Sei",
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  onPressed: () {
-                    // Flip the card programmatically
-                    con.flipcard();
-                  },
-                ),
+                  SizedBox.fromSize(
+                    size: Size(100, 100),
+                    child: ClipOval(
+                      child: Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                'images/icon/DEMAIS_ICONS/relogio.png',
+                                width: 50,
+                                height: 50,
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              Text(
+                                "Adiar",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.grey.shade700,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox.fromSize(
+                    size: Size(100, 100),
+                    child: ClipOval(
+                      child: Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          onTap: () {},
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                'images/icon/DEMAIS_ICONS/triste.png',
+                                width: 50,
+                                height: 50,
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              Text(
+                                "Não sei",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.grey.shade700,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

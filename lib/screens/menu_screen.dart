@@ -4,7 +4,6 @@ import 'package:akangatu_project/screens/nav_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'edit_profile_screen.dart';
-import 'statistic_screen.dart';
 import 'login_register_screen.dart';
 
 class MenuPage extends StatefulWidget {
@@ -123,29 +122,6 @@ class _MenuPage extends State<MenuPage> {
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.bar_chart_rounded,
-                        color: Colors.white),
-                    title: const Text(
-                      "ESTATÍSTICAS",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: ((context) => StatisticScreen())));
-                    },
-                  ),
-                  ListTile(
-                    leading:
-                        const Icon(Icons.app_settings_alt, color: Colors.white),
-                    title: const Text("CONFIGURAÇÕES",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
-                    onTap: () {
-                      print('Caminho selecionada: configurações');
-                    },
-                  ),
-                  ListTile(
                     leading: const Icon(Icons.help, color: Colors.white),
                     title: const Text(
                       "AJUDA",
@@ -171,40 +147,11 @@ class _MenuPage extends State<MenuPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 250, horizontal: 24),
+                        vertical: 350, horizontal: 24),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        // FlutterSwitch(
-                        //   width: 60.0,
-                        //   height: 35.0,
-                        //   toggleSize: 25.0,
-                        //   value: ThemeController.instance.isdartTheme,
-                        //   borderRadius: 30.0,
-                        //   padding: 2.0,
-                        //   activeToggleColor: Color(0xFF6E40C9),
-                        //   inactiveToggleColor: Color(0xFF6E40C9),
-                        //   activeSwitchBorder: Border.all(
-                        //     color: Color(0xFF3C1E70),
-                        //   ),
-                        //   inactiveSwitchBorder: Border.all(
-                        //     color: Color(0xFF3C1E70),
-                        //   ),
-                        //   activeColor: Color(0xFF271052),
-                        //   inactiveColor: Color(0xFF271052),
-                        //   activeIcon: Icon(
-                        //     Icons.nightlight_round,
-                        //     color: Colors.white,
-                        //   ),
-                        //   inactiveIcon: Icon(
-                        //     Icons.wb_sunny,
-                        //     color: Colors.white,
-                        //   ),
-                        //   onToggle: (value) {
-                        //     ThemeController.instance.changeTheme();
-                        //   },
-                        // ),
                         Switch(
                           value: ThemeController.instance.isdartTheme,
                           thumbIcon: thumbIcon,
@@ -220,7 +167,6 @@ class _MenuPage extends State<MenuPage> {
                               if (states.contains(MaterialState.selected)) {
                                 return null;
                               }
-
                               return Colors.purple.shade900;
                             },
                           ),
