@@ -1,5 +1,5 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
-import 'package:akangatu_project/screens/listcard_deck.dart';
+import 'package:akangatu_project/screens/list_card_deck.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/deck_service.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
@@ -116,9 +116,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Icon(Icons.layers, color: Colors.white),
                                       SizedBox(width: 2),
-                                      // ContaCard(deckId: docIds[index]),
-                                      GetCountCards(deckId: docIds[index]),
-                                
+                                      GetCountCards(deckId: docIds[index]),   
                                     ],
                                   ),
                                 ],

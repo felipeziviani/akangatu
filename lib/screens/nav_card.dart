@@ -1,3 +1,4 @@
+import 'package:akangatu_project/controllers/theme_controller.dart';
 import 'package:akangatu_project/screens/view_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
@@ -72,6 +73,9 @@ class _CardListPageState extends State<CardListPage> {
         ),
         child: Drawer(child: MenuPage()),
       ),
+      drawerScrimColor: ThemeController.instance.isdartTheme
+        ? const Color(0xFF2D2D2D)
+        : Colors.white,
       body: StreamBuilder<QuerySnapshot>(
         stream: _cardsStream,
         builder: (context, snapshot) {

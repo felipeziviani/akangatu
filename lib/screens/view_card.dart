@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import '../controllers/theme_controller.dart';
 import '../widgets/akanga_app_bar.dart';
-import '../widgets/button_view.dart';
+import '../widgets/button_view_dialog.dart';
 import 'menu_screen.dart';
 
 class ViewCard extends StatelessWidget {
@@ -28,7 +28,7 @@ class ViewCard extends StatelessWidget {
           ? const Color(0xFF2D2D2D)
           : Colors.white,
       body: Padding(
-        padding: const EdgeInsets.only(left:25, right:25, top: 100),
+        padding: const EdgeInsets.only(left:25, right:25, top: 120),
         child: ListView(
           physics: NeverScrollableScrollPhysics(),
           children: [
@@ -125,7 +125,7 @@ class ViewCard extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 50,
             ),
             Padding(
               padding:
@@ -142,7 +142,7 @@ class ViewCard extends StatelessWidget {
                              showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return viewButtonGreen();
+                                return ShowGreenDialog();
                               },
                             );
                           },
@@ -155,7 +155,7 @@ class ViewCard extends StatelessWidget {
                                 height: 50,
                               ),
                               SizedBox(
-                                height: 3,
+                                height: 5,
                               ),
                               Text(
                                 "Lembro",
@@ -178,6 +178,7 @@ class ViewCard extends StatelessWidget {
                         color: Colors.white,
                         child: InkWell(
                           onTap: () {
+                            ShowLateDialog();
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -188,7 +189,7 @@ class ViewCard extends StatelessWidget {
                                 height: 50,
                               ),
                               SizedBox(
-                                height: 3,
+                                height: 5,
                               ),
                               Text(
                                 "Adiar",
@@ -214,7 +215,7 @@ class ViewCard extends StatelessWidget {
                              showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return viewButtonRed();
+                                return ShowRedDialog();
                               },
                             );
                           },
@@ -227,7 +228,7 @@ class ViewCard extends StatelessWidget {
                                 height: 50,
                               ),
                               SizedBox(
-                                height: 3,
+                                height: 5,
                               ),
                               Text(
                                 "Não lembro",
