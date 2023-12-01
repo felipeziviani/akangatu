@@ -178,7 +178,12 @@ class ViewCard extends StatelessWidget {
                         color: Colors.white,
                         child: InkWell(
                           onTap: () {
-                            ShowLateDialog();
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return ShowLateDialog();
+                              },
+                            );
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

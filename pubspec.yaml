@@ -56,6 +56,9 @@ dependencies:
   flutter_swiper_view: ^1.1.8
   flip_card: ^0.7.0
   flutter_flip_card: ^0.0.4
+  timezone: ^0.8.0
+  flutter_timezone: ^1.0.8
+  flutter_local_notifications: ^9.4.0
 
 flutter_native_splash:
   color: "#FFFFFF"
