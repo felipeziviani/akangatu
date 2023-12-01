@@ -1,45 +1,31 @@
 import 'package:akangatu_project/screens/view_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import '../widgets/akanga_app_bar.dart';
 import 'menu_screen.dart';
+import 'nav_card.dart';
 
-class CardListPage extends StatefulWidget {
+class ListcardDeck extends StatefulWidget {
+  const ListcardDeck({super.key, required this.documentId});
+  final String documentId;
+
   @override
-  _CardListPageState createState() => _CardListPageState();
+  State<ListcardDeck> createState() => _ListcardDeckState();
 }
 
-class _CardListPageState extends State<CardListPage> {
-  var userId = FirebaseAuth.instance.currentUser!.uid;
+
+class _ListcardDeckState extends State<ListcardDeck> {
+var documentId = FirebaseAuth.instance.currentUser!.uid;
   CollectionReference _collection = FirebaseFirestore.instance
       .collection('cards_${FirebaseAuth.instance.currentUser!.uid}');
 
-  late Stream<QuerySnapshot> _cardsStream;
 
-  final con = FlipCardController();
 
-  @override
-  void initState() {
-    super.initState();
-    _cardsStream =
-        FirebaseFirestore.instance.collection('cards_${userId}').snapshots();
-  }
 
-  SubtractionUpdateDeckCount(String documentId, BuildContext context) async {
-    DocumentReference document = _collection.doc(documentId);
-    late var newCount;
-    final count =
-        document.get().asStream().map((event) => newCount = 'qtdCard');
-    newCount = newCount--;
-    document.update({
-      'qtdCard': newCount,
-    });
-    print(count);
-  }
+    late Stream<QuerySnapshot> _cardsStream;
 
-  deleteCard(String documentId) async {
+ deleteCard(String documentId) async {
     try {
       await _collection
           .doc(documentId)
@@ -58,11 +44,25 @@ class _CardListPageState extends State<CardListPage> {
     }
   }
 
+
+
+
+
+  @override
+void initState() {
+  super.initState();
+  _cardsStream = FirebaseFirestore.instance
+      .collection('cards_${FirebaseAuth.instance.currentUser!.uid}')
+      .where("deckId", isEqualTo: widget.documentId)
+      .snapshots();
+}
+
+
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 360;
+   print(widget.documentId);
+     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
-
     return Scaffold(
       appBar: AkangaAppBar(),
       drawer: ClipRRect(
@@ -83,7 +83,7 @@ class _CardListPageState extends State<CardListPage> {
             return Center(child: Text('Nenhum card encontrado.'));
           }
 
-          final cards = snapshot.data!.docs.map((document) {
+            final cards = snapshot.data!.docs.map((document) {
             final data = document.data() as Map<String, dynamic>;
             final frenteData = data['frente'] as List<dynamic>?;
             String frente = '';
@@ -98,7 +98,7 @@ class _CardListPageState extends State<CardListPage> {
 
             return GestureDetector(
               onTap: () async {
-                final deckName = GetName(documentId: data['deckId']);
+                final deckName =  GetName(documentId: data['deckId']);
                 final frenteData = data['frente'] as List<dynamic>? ?? [];
                 final versoData = data['verso'] as List<dynamic>? ?? [];
 
@@ -126,7 +126,7 @@ class _CardListPageState extends State<CardListPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ViewCard(
-                      deckName: deckName,
+                      deckName: deckName, 
                       frente: frente,
                       verso: verso,
                     ),
@@ -154,7 +154,7 @@ class _CardListPageState extends State<CardListPage> {
                                   children: [
                                     GetName(documentId: data['deckId']),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 250),
+                                      padding: EdgeInsets.only(left: 250),
                                       child: IconButton(
                                         onPressed: () {
                                           deleteCard(document.id);
@@ -222,45 +222,6 @@ class _CardListPageState extends State<CardListPage> {
           );
         },
       ),
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class GetName extends StatelessWidget {
-  var userId = FirebaseAuth.instance.currentUser!.uid;
-  final String documentId;
-  // late final String name;
-  GetName({required this.documentId});
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: FirebaseFirestore.instance
-          .collection('decks_${userId}')
-          .doc(documentId)
-          .get(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-          // name = data['name'];
-          return Text(
-            data['name'],
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          );
-        }
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircularProgressIndicator(),
-          ],
-        );
-      },
     );
   }
 }

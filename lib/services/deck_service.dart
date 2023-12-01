@@ -52,7 +52,8 @@ class DeckService extends ChangeNotifier {
   updateDeckCount(String documentId, BuildContext context) async {
     DocumentReference document = _collection.doc(documentId);
     late var newCount;
-    final count = document.get().asStream().map((event) => newCount = 'qtdCard');
+    final count =
+        document.get().asStream().map((event) => newCount = 'qtdCard');
     newCount = newCount++;
     document.update({
       'qtdCard': newCount,
@@ -102,6 +103,7 @@ class GetDeckName extends StatelessWidget {
 
 class GetCountCards extends StatelessWidget {
   final String deckId;
+
   GetCountCards({required this.deckId});
 
   CollectionReference cardCollection =
@@ -109,24 +111,76 @@ class GetCountCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var countCard;
-    cardCollection.where("deckId", isEqualTo: deckId).count().get().then(
-      (res) {
-        countCard = res.count;
-        print(countCard);
+    return FutureBuilder<int>(
+      future: getCount(),
+      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator(); // ou outro widget de carregamento
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return Text(
+            snapshot.data.toString(),
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        }
       },
-      onError: (e) => print("//////////////ERRO: $e"),
-    );
-    return Text(
-      countCard.toString(),
-      style: TextStyle(
-        fontSize: 18,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
     );
   }
+
+  Future<int> getCount() async {
+    var countCard = await cardCollection
+        .where("deckId", isEqualTo: deckId)
+        .get()
+        .then((res) => res.size)
+        .catchError((e) {
+      print("//////////////ERRO: $e");
+      return 0;
+    });
+    return countCard;
+  }
 }
+
+// class ContaCard extends StatefulWidget {
+//   final String deckId;
+//   ContaCard({required this.deckId});
+
+//   @override
+//   State<ContaCard> createState() => _ContaCardState();
+// }
+
+// class _ContaCardState extends State<ContaCard> {
+//   // ContaCard({required this.deckId});
+
+//   CollectionReference cardCollection =
+//       FirebaseFirestore.instance.collection('cards_${userId}');
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var countCard;
+//     cardCollection.where("deckId", isEqualTo: widget.deckId).count().get().then(
+//       (res) {
+//         setState(() {
+//           countCard = res.count;
+//         });
+//         print(countCard);
+//       },
+//       onError: (e) => print("//////////////ERRO: $e"),
+//     );
+//     return Text(
+//       countCard.toString(),
+//       style: TextStyle(
+//         fontSize: 18,
+//         color: Colors.white,
+//         fontWeight: FontWeight.bold,
+//       ),
+//     );
+//   }
+// }
 
 class GetDeckDate extends StatelessWidget {
   final String documentId;

@@ -154,7 +154,7 @@ class _EditDeckDialogState extends State<EditDeckDialog> {
             children: [
               Container(
                 margin:
-                    new EdgeInsets.only(bottom: 20.0, left: 15.0, right: 15.0),
+                    new EdgeInsets.only(bottom: 20.0, left: 15.0, right: 7.5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   gradient: LinearGradient(

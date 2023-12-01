@@ -1,4 +1,5 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
+import 'package:akangatu_project/screens/listcard_deck.dart';
 import 'package:akangatu_project/screens/menu_screen.dart';
 import 'package:akangatu_project/services/deck_service.dart';
 import 'package:akangatu_project/widgets/akanga_app_bar.dart';
@@ -20,23 +21,24 @@ class _HomePageState extends State<HomePage> {
   List<String> docIds = [];
 
   var userId = FirebaseAuth.instance.currentUser!.uid;
-  
+
   Future getDocId() async {
     docIds.clear();
-    await FirebaseFirestore.instance.collection('decks_$userId').get().then(
-          (snapshot) { 
-            snapshot.docs.forEach(
-              (document) {
-                docIds.add(document.reference.id);
-              },
-            );
-          }
-        );
+    await FirebaseFirestore.instance
+        .collection('decks_$userId')
+        .get()
+        .then((snapshot) {
+      snapshot.docs.forEach(
+        (document) {
+          docIds.add(document.reference.id);
+        },
+      );
+    });
   }
 
   late ListView List_Deck;
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AkangaAppBar(),
       drawer: ClipRRect(
@@ -57,10 +59,10 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => const ListCard()),
-                    // );
+                   Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ListcardDeck(documentId: docIds[index],)),
+            );
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -83,9 +85,11 @@ class _HomePageState extends State<HomePage> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return EditDeckDialog(
-                                            documentId: docIds[index],
-                                            data: GetDeckName(documentId: docIds[index]).toString(),
-                                            );
+                                          documentId: docIds[index],
+                                          data: GetDeckName(
+                                                  documentId: docIds[index])
+                                              .toString(),
+                                        );
                                       },
                                     );
                                   },
@@ -112,16 +116,9 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Icon(Icons.layers, color: Colors.white),
                                       SizedBox(width: 2),
+                                      // ContaCard(deckId: docIds[index]),
                                       GetCountCards(deckId: docIds[index]),
-                                      // GetCountCards(deckId: docIds[index]),
-                                      // Text(
-                                      //   'QUANTIDADE',
-                                      //   style: TextStyle(
-                                      //     fontSize: 18,
-                                      //     color: Colors.white,
-                                      //     fontWeight: FontWeight.bold,
-                                      //   ),
-                                      // ),
+                                
                                     ],
                                   ),
                                 ],

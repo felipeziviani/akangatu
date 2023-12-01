@@ -24,7 +24,7 @@ class _DecksDropdownMenuState extends State<DecksDropdownMenu> {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(
-            child: Text('ERRO PELO AMOR DE DEUS ${snapshot.error}'),
+            child: Text('${snapshot.error}'),
           );
         }
         List<DropdownMenuItem> allDecks = [];

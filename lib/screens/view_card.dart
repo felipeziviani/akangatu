@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import '../controllers/theme_controller.dart';
 import '../widgets/akanga_app_bar.dart';
+import '../widgets/button_view.dart';
 import 'menu_screen.dart';
 
 class ViewCard extends StatelessWidget {
@@ -27,7 +28,7 @@ class ViewCard extends StatelessWidget {
           ? const Color(0xFF2D2D2D)
           : Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(25),
+        padding: const EdgeInsets.only(left:25, right:25, top: 100),
         child: ListView(
           physics: NeverScrollableScrollPhysics(),
           children: [
@@ -137,7 +138,14 @@ class ViewCard extends StatelessWidget {
                       child: Material(
                         color: Colors.white,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                             showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return viewButtonGreen();
+                              },
+                            );
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -150,7 +158,7 @@ class ViewCard extends StatelessWidget {
                                 height: 3,
                               ),
                               Text(
-                                "Sei",
+                                "Lembro",
                                 style: TextStyle(
                                   color: Colors.grey.shade700,
                                   fontSize: 15,
@@ -169,7 +177,8 @@ class ViewCard extends StatelessWidget {
                       child: Material(
                         color: Colors.white,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -201,7 +210,14 @@ class ViewCard extends StatelessWidget {
                       child: Material(
                         color: Colors.white,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                             showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return viewButtonRed();
+                              },
+                            );
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -214,7 +230,7 @@ class ViewCard extends StatelessWidget {
                                 height: 3,
                               ),
                               Text(
-                                "Não sei",
+                                "Não lembro",
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.grey.shade700,
