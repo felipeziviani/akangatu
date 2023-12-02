@@ -34,7 +34,7 @@ class ViewCard extends StatelessWidget {
           children: [
             FlipCard(
               rotateSide: RotateSide.right,
-              onTapFlipping: true,
+              onTapFlipping: false,
               axis: FlipAxis.vertical,
               controller: con,
               frontWidget: Container(
@@ -145,6 +145,7 @@ class ViewCard extends StatelessWidget {
                                 return ShowGreenDialog();
                               },
                             );
+                            con.flipcard();
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

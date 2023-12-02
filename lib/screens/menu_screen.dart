@@ -53,25 +53,10 @@ class _MenuPage extends State<MenuPage> {
               child: ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 24, horizontal: 24),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          'AKANGÁ',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'A chave da memorização',
-                          style: TextStyle(fontSize: 17, color: Colors.white),
-                        ),
-                      ],
-                    ),
+                  Column(
+                    children: <Widget>[
+                      Image.asset('images/icon/NEON/NeonLogo.png', width: 120 * fem, height: 120 * fem, alignment: Alignment.center, filterQuality:FilterQuality.high )
+                    ],
                   ),
                   ListTile(
                     leading:
@@ -147,7 +132,7 @@ class _MenuPage extends State<MenuPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 350, horizontal: 24),
+                        vertical: 300, horizontal: 24),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
