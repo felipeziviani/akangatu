@@ -218,6 +218,7 @@ class ViewCard extends StatelessWidget {
                         color: Colors.white,
                         child: InkWell(
                           onTap: () {
+                            con.flipcard();
                              showDialog(
                               context: context,
                               builder: (BuildContext context) {

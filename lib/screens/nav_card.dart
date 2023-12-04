@@ -74,8 +74,8 @@ class _CardListPageState extends State<CardListPage> {
         child: Drawer(child: MenuPage()),
       ),
       drawerScrimColor: ThemeController.instance.isdartTheme
-        ? const Color(0xFF2D2D2D)
-        : Colors.white,
+          ? const Color(0xFF2D2D2D)
+          : Colors.white,
       body: StreamBuilder<QuerySnapshot>(
         stream: _cardsStream,
         builder: (context, snapshot) {
@@ -150,43 +150,42 @@ class _CardListPageState extends State<CardListPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 30, left: 8.0),
-                            child: Row(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    GetName(documentId: data['deckId']),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 250),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          deleteCard(document.id);
-                                        },
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                          shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              side: BorderSide(
-                                                  color: Colors.transparent),
+                            child: Flexible(
+                              child: Row(
+                                children: [
+                                  GetName(documentId: data['deckId']),
+                                  Row(
+                                    textDirection: TextDirection.rtl,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      IconButton(
+                                          onPressed: () {
+                                            deleteCard(document.id);
+                                          },
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.transparent),
+                                            shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                side: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        icon: Icon(
-                                          size: 20,
-                                          Icons.delete,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                          icon: Icon(
+                                            size: 20,
+                                            Icons.delete,
+                                            color: Colors.white,
+                                          ),
+                                          alignment: AlignmentDirectional.centerEnd),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Divider(

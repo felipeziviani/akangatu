@@ -1,4 +1,5 @@
 import 'package:akangatu_project/controllers/theme_controller.dart';
+import 'package:akangatu_project/screens/help_screen.dart';
 import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:akangatu_project/screens/nav_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -114,7 +115,11 @@ class _MenuPage extends State<MenuPage> {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
-                      print('Caminho selecionada: ajuda');
+                       Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AjudaScreen()),
+                      );
                     },
                   ),
                   ListTile(

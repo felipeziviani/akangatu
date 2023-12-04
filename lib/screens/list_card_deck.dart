@@ -153,31 +153,28 @@ void initState() {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     GetName(documentId: data['deckId']),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 250),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          deleteCard(document.id);
-                                        },
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.transparent),
-                                          shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              side: BorderSide(
-                                                  color: Colors.transparent),
-                                            ),
+                                    IconButton(
+                                      onPressed: () {
+                                        deleteCard(document.id);
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.transparent),
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            side: BorderSide(
+                                                color: Colors.transparent),
                                           ),
                                         ),
-                                        icon: Icon(
-                                          size: 20,
-                                          Icons.delete,
-                                          color: Colors.white,
-                                        ),
+                                      ),
+                                      icon: Icon(
+                                        size: 20,
+                                        Icons.delete,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ],
