@@ -69,7 +69,7 @@ class NotificationService {
 
   showNotificationScheduled(
       CustomNotification notification, Duration duration) {
-    final date = DateTime.now().add(Duration.zero);
+    final date = DateTime.now().add(duration);
 
     localNotificationsPlugin.zonedSchedule(
       notification.id,

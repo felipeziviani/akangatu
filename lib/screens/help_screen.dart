@@ -14,19 +14,19 @@ class _AjudaScreenState extends State<AjudaScreen> {
   FocusNode _searchFocus = FocusNode();
   Map<String, String> _faqDetails = {
     'Como adicionar um novo card?':
-        'Para adicionar um novo card, vá para a tela principal e clique no ícone de "Mais" no canto inferior direito, após preencha as informações necessárias e clique em "Salvar".',
-    'Como editar meu perfil?':
-        'Você pode editar seu perfil na tela de "Editar Perfil". Lá você pode atualizar suas informações, como Nome, Email e Senha.',
+        'Para adicionar um novo card, vá até a tela principal e clique no ícone + no canto inferior direito, selecione ADICIONAR CARD e após preencher as informações necessárias, clique em SALVAR.',
     'Como excluir um card?':
-        'Na tela de visualização do card, clique no ícone de "lixeira" e excluirá automaticamente o card.',
+        'Na tela de visualização do card, clique no ícone de lixeira, que excluirá automaticamente o card.',
     'Como alterar o nome do deck ou excluí-lo?':
-        'Na tela principal, clique no ícone de "engrenagem", após aparecerá um editor para que haja a alteração do deck desejado ou que ele possa ser excluído.',
-    'O que é o Navegar por cards?':
-        'Na opção Navegar por cards ao clicar no menu você poderá ver todos os seus cards salvos em respectivos decks, podendo excluí-los ou revê-los.',
-    'Como ativar o modo escuro?':
-        'Na tela principal, clique no menu e no canto inferior direito haverá um ícone para escolha do modo escuro.',
+        'Na tela principal, clique no ícone de engrenagem do deck que deseja alterar, aparecerá um editor para que seja feita a alteração ou exclusão do deck desejado.',
+    'O que é a tela NAVEGAR POR CARDS?':
+        'A opção NAVEGAR POR CARDS, no menu lateral, permite a visualização de todos os cards salvos, podendo excluí-los ou estudá-los.',
+    'Como editar meu perfil?':
+        'Você pode editar seu perfil na tela de EDITAR PERFIL, no menu lateral. Lá podem ser atualizadas informações como nome, e-mail e senha.',
     'Como excluir minha conta?':
-        'Na tela principal, clique no menu e entre na aba Editar Perfil, após isso se depará com um ícone de "lixeira", clicando nela excluirá sua conta automaticamente.',
+        'No menu lateral, na aba EEDITAR PERFIL, há um ícone de lixeira, clicando nele a conta será excluída automaticamente.',
+    'Como ativar o modo noturno?':
+        'No canto inferior direito do menu lateral há a ferramenta para escolha do modo noturno.',
   };
 
   @override
@@ -62,6 +62,8 @@ class _AjudaScreenState extends State<AjudaScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double baseWidth = 360;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
     return Scaffold(
       appBar: AkangaAppBar(),
       drawer: ClipRRect(
@@ -92,12 +94,12 @@ class _AjudaScreenState extends State<AjudaScreen> {
                   focusNode: _searchFocus,
                   decoration: InputDecoration(
                       hintText: _searchText.isEmpty ? 'Pesquisar' : '',
-                      prefixIcon: Icon(Icons.search,
-                          color: Color.fromRGBO(105, 44, 133, 1)),
+                      prefixIcon:
+                          Icon(Icons.search, color: Colors.deepPurple.shade700),
                       filled: false,
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                        color: Color(0xFF4A148C),
+                        color: Colors.deepPurple.shade700,
                         width: 2,
                       ))),
                 ),
@@ -105,11 +107,11 @@ class _AjudaScreenState extends State<AjudaScreen> {
             ),
             SizedBox(height: 20),
             Text(
-              'Perguntas Frequentes:',
+              'FAQ - PERGUNTAS FREQUENTES',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color.fromRGBO(74, 20, 140, 1),
+                color: Colors.deepPurple.shade700,
               ),
             ),
             SizedBox(height: 10),
@@ -121,32 +123,31 @@ class _AjudaScreenState extends State<AjudaScreen> {
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
-                      child: Card(
-                        color: Color.fromRGBO(235, 235, 235, 1),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: BorderSide.none),
-                        child: ExpansionTile(
-                          title: Text(
-                            _filteredFaqs()[index],
-                            style: TextStyle(
-                              color: Color.fromRGBO(74, 20, 140, 1),
-                              fontWeight: FontWeight.bold,
-                            ),
+                      child: ExpansionTile(
+                        collapsedBackgroundColor: Colors.grey.shade200,
+                        backgroundColor: Colors.grey.shade200,
+                        collapsedIconColor: Colors.deepPurple.shade700,
+                        iconColor: Colors.deepPurple.shade700,
+                        title: Text(
+                          _filteredFaqs()[index],
+                          style: TextStyle(
+                            color: Colors.deepPurple.shade700,
+                            fontWeight: FontWeight.bold,
                           ),
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                _faqDetails[_filteredFaqs()[index]] ?? '',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        ),
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 20, right: 20, bottom: 15),
+                            child: Text(
+                              _faqDetails[_filteredFaqs()[index]] ?? '',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade700,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   );
@@ -154,35 +155,30 @@ class _AjudaScreenState extends State<AjudaScreen> {
               ),
             ),
             SizedBox(height: 20),
-            Text(
-              'Sobre Nós',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Color.fromRGBO(74, 20, 140, 1),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'SOBRE NÓS',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurple.shade700,
+                  ),
+                ),
+                Image.asset(
+                  'images/icon/COLORFUL/ColorfulLogo.png',
+                  width: 50 * fem,
+                )
+              ],
             ),
-            SizedBox(height: 10),
-            Card(
-              color: Color.fromRGBO(235, 235, 235, 1),
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Bem-vindo ao Akangá!',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Somos uma equipe dedicada a criar aplicativos incríveis para ajudar você a organizar suas informações de maneira simples e eficiente. Estamos sempre trabalhando para melhorar sua experiência.',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
+            Padding(
+              padding: EdgeInsets.only(top: 10, left: 8, bottom: 8, right: 8),
+              child: Text(
+                'Somos uma equipe que se dedicou à criação de uma plataforma que atua na dificuldade de retenção de ideias pelo cérebro humano e você, nosso usuário, tem o prazer de usufuir dessa técnica em seu smartphone.',
+                style: TextStyle(
+                  color: Colors.grey.shade700,
+                  fontSize: 16,
                 ),
               ),
             ),

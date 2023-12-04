@@ -82,12 +82,15 @@ class ShowLateDialog extends StatelessWidget {
   showNotification(BuildContext context) {
     print('///////////////////////////////////////////');
     Provider.of<NotificationService>(context, listen: false)
-        .showLocalNotification(CustomNotification(
-            id: 1,
-            title: 'Ei, você tem cards para revisar!',
-            body:
-                'Lembra dos cards que você adiou? É hora de dar uma olhadinha neles!',
-            context: context));
+        .showNotificationScheduled(
+      CustomNotification(
+          id: 1,
+          title: 'Ei, você tem cards para revisar!',
+          body:
+              'Lembra dos cards que você adiou? É hora de dar uma olhadinha neles!',
+          context: context),
+      Duration(seconds: 10),
+    );
   }
 
   @override

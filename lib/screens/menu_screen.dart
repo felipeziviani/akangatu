@@ -4,6 +4,7 @@ import 'package:akangatu_project/screens/home_screen.dart';
 import 'package:akangatu_project/screens/nav_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'create_card_screen.dart';
 import 'edit_profile_screen.dart';
 import 'login_register_screen.dart';
 
@@ -93,6 +94,22 @@ class _MenuPage extends State<MenuPage> {
                   ),
                   ListTile(
                     leading:
+                        const Icon(Icons.add_card_rounded, color: Colors.white),
+                    title: const Text(
+                      "ADICIONAR CARD",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CardPage()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading:
                         const Icon(Icons.search_sharp, color: Colors.white),
                     title: const Text(
                       "NAVEGAR POR CARDS",
@@ -137,7 +154,7 @@ class _MenuPage extends State<MenuPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 300, horizontal: 24),
+                        vertical: 250, horizontal: 24),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
